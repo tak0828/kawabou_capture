@@ -45,6 +45,8 @@ class SiteBase:
     
     # スクリーンショット
     def screenshot(self,path):
+        # 画面の遷移を待つ時間(正しい時間かどうかは後ほど要検証)
+        time.sleep(3)
         self.driver.save_screenshot(path)
         print("screenshot")
     
