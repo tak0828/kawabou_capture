@@ -28,6 +28,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
+    kawabou.save_screenshot_png("temp.png")
 
 if __name__ == "__main__":
     main()

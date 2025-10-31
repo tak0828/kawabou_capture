@@ -50,7 +50,7 @@ class SiteBase:
     
     # のちほど配置先パスを動的にするように変更予定(今docker仕様なので)
     def save_screenshot_png(self, file_name_png):
-        png_dir = "/app/media/png"
+        png_dir = "./png"
         os.makedirs(png_dir, exist_ok=True)
         png_path = os.path.join(png_dir, os.path.basename(file_name_png))
         self.screenshot(png_path)
