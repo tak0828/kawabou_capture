@@ -10,7 +10,7 @@ import CONST
 import os
 
 class SiteBase:
-    def __init__(self,debug=False):
+    def __init__(self,window_width:int=1920,window_height:int=1500,debug:bool=False):
         # オプションを設定
         self.__options = Options()
         self.__options.add_argument("--no-sandbox")         # Docker向け
@@ -18,7 +18,7 @@ class SiteBase:
         self.__options.add_argument("--disable-gpu")        # GPU無効化
         self.__options.add_argument("--remote-debugging-port=9222") # デバッグ用
         self.__options.add_argument(f"--user-data-dir=/tmp/selenium_user_data_{os.getpid()}")  # ユニークなプロファイル
-        self.__options.add_argument("--window-size=1920,1500") # ウィンドウサイズ指定(ヘッドレスモードで必要)
+        self.__options.add_argument(f"--window-size={window_width},{window_height}") # ウィンドウサイズ指定(ヘッドレスモードで必要)
         self.__options.add_argument("--lang=ja-JP")         # 日本語対応
         # debug時はヘッドレスモードとしない。
         if not debug:
@@ -41,14 +41,15 @@ class SiteBase:
     
     # 必要ページ選択
     def get_page(self,url):
-        self.__driver.get(url)
+        self.driver.get(url)
     
+    # スクリーンショット
     def screenshot(self):
         print("screenshot")
 
     # ドライバーを止める
     def shutdown(self):
-        self.__driver.stop()
+        self.driver.stop()
         
     ###### プロパティ ######
     @property

@@ -11,8 +11,8 @@ from sitebase import SiteBase
 
 
 class Kawabou(SiteBase):
-    def __init__(self,debug=False):
-        super().__init__(debug)
+    def __init__(self,window_width:int=1920,window_height:int=1500,debug:bool=False):
+        super().__init__(window_width=window_width,window_height=window_height,debug=debug)
 
     # ログイン
     def login(self):
