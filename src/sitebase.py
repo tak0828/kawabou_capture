@@ -44,8 +44,17 @@ class SiteBase:
         self.driver.get(url)
     
     # スクリーンショット
-    def screenshot(self):
+    def screenshot(self,path):
+        self.driver.save_screenshot(path)
         print("screenshot")
+    
+    # のちほど配置先パスを動的にするように変更予定(今docker仕様なので)
+    def save_screenshot_png(self, file_name_png):
+        png_dir = "/app/media/png"
+        os.makedirs(png_dir, exist_ok=True)
+        png_path = os.path.join(png_dir, os.path.basename(file_name_png))
+        self.screenshot(png_path)
+        print(f"スクショ保存: {png_path}")
 
     # ドライバーを止める
     def shutdown(self):
