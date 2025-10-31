@@ -32,12 +32,12 @@ class Kawabou(SiteBase):
     
     # 雨量グラフ(対象観測所)スクリーンショット
     # 例は、篠崎
-    def screenshot_rain_graph_kobetu(self,gameid="03-0803",areacode=2127900100003):
-        self.__rain_graph_kobetu(gameid,areacode)
+    def screenshot_rain_graph_kobetu(self,areacode=2127900100003):
+        self.__rain_graph_kobetu(areacode)
         self.save_screenshot_png("radar_genkyo_kobetu.png")
 
-    def screenshot_rain_graph_kobetu(self,gameid="03-0803",areacode=2127900100003):
-        self.__rain_graph_kobetu(gameid,areacode)
+    def screenshot_rain_graph_kobetu(self,areacode=2127900100003):
+        self.__rain_graph_kobetu(areacode)
         self.save_screenshot_png("radar_genkyo_kobetu.png")
 
     # レーダ雨量（現況）Cバンドスクリーンショット
@@ -47,29 +47,29 @@ class Kawabou(SiteBase):
 
     # 時刻水位・流量経過表
     # 例は東京都
-    def screenshot_suii_keika(self,gameid="03-1001",prefcode=1301):
-        self.__suii_keika(gameid,prefcode)
+    def screenshot_suii_keika(self,prefcode=1301):
+        self.__suii_keika(prefcode)
         self.save_screenshot_png("suii_keika.png")
     
     # 雨量グラフページ
     def __rain_graph(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetuMlt.do?requestType=1&init=city&gamenId=02-0903&areaCd={areacode}&rvrsysCd=&prefCd=&townCd=")
     # 雨量グラフ(対象観測所)ページ
-    def __rain_graph_kobetu(self,gameid,areacode):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={areacode}&gamenId={gameid}&timeType=60&requestType=1")
+    def __rain_graph_kobetu(self,areacode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={areacode}&gamenId=03-0803&timeType=60&requestType=1")
     # レーダ雨量（現況）Cバンド
     def __radar_genkyo(self,prefcode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&prefCd={prefcode}&gamenId=03-1801")
 
     # 時刻水位・流量経過表ページ
-    def __suii_keika(self,gameid,prefcode):
-        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?requestType=1&init=city&gamenId={gameid}&areaCd=&rvrsysCd=&prefCd={prefcode}&townCd=&stgGrpKind=crsSect")
+    def __suii_keika(self,prefcode):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?requestType=1&init=city&gamenId=03-1001&areaCd=&rvrsysCd=&prefCd={prefcode}&townCd=&stgGrpKind=crsSect")
 
 def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
     kawabou.screenshot_suii_keika()
-    
+
 if __name__ == "__main__":
     main()
