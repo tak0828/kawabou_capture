@@ -203,6 +203,43 @@ class Kawabou(SiteBase):
     def __over_city_timesuii_keika(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1002")
 
+#### 水質関連 ####
+    # 水質経過表
+    def __over_city_suisitu_keika(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeikaDay.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1306")
+
+    # 水質詳細表
+    def __over_city_suisitu_keika(self,areacode=84,obsrvId:str="2152800600001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDayDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1308")
+
+    # 時刻水質グラフ
+    def __over_city_suisitu_kobetu(self,obsrvId:str="2152800600001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1303&timeType=60&requestType=1")
+    # 時刻水質グラフ(対象観測所)
+    # 同一URL
+    def __over_city_suisitu_kobetu_1(self,obsrvId:str="2152800600001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1303&timeType=60&requestType=1")
+
+    # 時刻水質現況表
+    def __over_city_timesuisitu_genkyou(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituGenkyou.do?init=init&areaCd={areacode}&gamenId=02-1301")
+
+    # 時刻水質経過表
+    def __over_city_timesuisitu_keika(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1302")
+
+    # 時刻水質経過表(対象観測所)
+    def __over_city_timesuisitu_keika_kobetu(self,areacode=83):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeika.do?init=init&areaCd={areacode}&gamenId=02-1302")
+
+    # 時刻水質詳細表
+    def __over_city_timesuisitu_kobetuDt1(self,areacode=84,obsrvId:str="2152800600001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1304")
+
+    # 日水質詳細表
+    def __over_city_daysuisitu_kobetuDt1(self,areacode=84,obsrvId:str="2152800600001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDayDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1308")
+
 
 ### 欠測・未受信(miss)
     
