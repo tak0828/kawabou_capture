@@ -30,7 +30,32 @@ class Kawabou(SiteBase):
 ####            スクリーンショット　処理群                                              ######
 ############################################################################################
 
+### 概況図
+    def screenshot_gaikyo(self,pngname:str="gaikyou.png"):
+        self.login()
+        self.__gaikyo()
+        self.save_screenshot_png(pngname)
+
+
 ### 基準値超過(over)
+
+    # 雨量グラフ(対象観測所)スクリーンショット
+    def screenshot_over_city_rain_kobetu(self,pngname:str="over_city_rain_kobetu.png"):
+        self.login()
+        self.__over_city_rain_kobetu()
+        self.save_screenshot_png(pngname)
+
+    # 雨量グラフ(比較3か所)スクリーンショット
+    def screenshot_over_city_rain_kobetuMLT(self,pngname:str="over_city_rain_kobetuMLT.png"):
+        self.login()
+        self.__over_city_rain_kobetuMLT()
+        self.save_screenshot_png(pngname)
+
+    # レーダ雨量(累加)(Cバンド)スクリーンショット
+    def screenshot_over_city_radar_ruika(self,pngname:str="over_city_radar_ruika.png"):
+        self.login()
+        self.__over_city_radar_ruika()
+        self.save_screenshot_png(pngname)
 
 ### 欠測・未受信(miss)
 
@@ -129,6 +154,10 @@ class Kawabou(SiteBase):
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
+
+### 概況図
+    def __gaikyo(self):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do")
 
 ### 基準値超過(over) ###
 
