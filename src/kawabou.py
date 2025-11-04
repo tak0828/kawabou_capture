@@ -91,6 +91,18 @@ class Kawabou(SiteBase):
         self.__dam_kobetu(areacode)
         self.save_screenshot_png("dam_kobetu.png")
 
+    # 時刻水質情報経過表
+    # 例は東京都
+    def screenshot_suisitu_keika(self,prefcode=1301):
+        self.__suisitu_keika(prefcode)
+        self.save_screenshot_png("suisitu_keika.png")
+
+    # 時刻水質情報グラフ
+    # 例は京葉大橋平均
+    def screenshot_suisitu_kobetu(self,areacode:str="2127900600025"):
+        self.__suisitu_kobetu(areacode)
+        self.save_screenshot_png("suisitu_kobetu.png")
+
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
@@ -140,14 +152,22 @@ class Kawabou(SiteBase):
     def __dam_kobetu(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1102&timeType=60&requestType=1")
 
+    # 時刻水質経過表
+    def __suisitu_keika(self,prefcode):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeika.do?init=init&prefCd={prefcode}&townCd=&areaCd=&rvrsysCd=&gamenId=03-1301")
+
+    # 時刻水質グラフ
+    def __suisitu_kobetu(self,areacode):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1302&timeType=60&requestType=1")
+
 
 
 def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_dam_keika()
-    kawabou.screenshot_dam_kobetu()
+    kawabou.screenshot_suisitu_keika()
+    kawabou.screenshot_suisitu_kobetu()
 
 if __name__ == "__main__":
     main()
