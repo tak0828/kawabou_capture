@@ -73,6 +73,11 @@ class Kawabou(SiteBase):
     def screenshot_suii_keika(self,prefcode=1301):
         self.__suii_keika(prefcode)
         self.save_screenshot_png("suii_keika.png")
+    # 時刻水位・流量経過表
+    # 例は高砂
+    def screenshot_suii_keika_kobetu(self,areacode=2127900400049):
+        self.__suii_keika_kobetu(areacode)
+        self.save_screenshot_png("suii_keika_kobetu.png")
 
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
@@ -107,11 +112,15 @@ class Kawabou(SiteBase):
     def __suii_keika(self,prefcode):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?requestType=1&init=city&gamenId=03-1001&areaCd=&rvrsysCd=&prefCd={prefcode}&townCd=&stgGrpKind=crsSect")
 
+    # 時刻水位・流量経過表ページ(対象観測所)
+    def __suii_keika_kobetu(self,areacode):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={areacode}&gamenId=03-1005&stgGrpKind=survFore&fvrt=yes")
+
 def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_gaikyo_map()
+    kawabou.screenshot_suii_keika_kobetu()
 
 if __name__ == "__main__":
     main()
