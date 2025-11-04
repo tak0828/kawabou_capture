@@ -130,7 +130,79 @@ class Kawabou(SiteBase):
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
 
-### 基準値超過(over)
+### 基準値超過(over) ###
+
+#### 雨量関連 ####
+
+    # 雨量グラフ(10分)ページ
+    def __over_city_rain_keika(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0902")
+    # 時間雨量経過表ページ
+    # 雨量グラフ(10分)ページと同一URL
+    def __over_city_rain_keika_1(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0902")
+    # 雨量グラフ(対象観測所)ページ
+    def __over_city_rain_kobetu(self,ovsrvId:str="0332900100039"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={ovsrvId}&gamenId=02-0904&timeType=60&requestType=1")
+    # 時間雨量経過表(対象観測所1か所)
+    # 雨量グラフ(対象観測所)ページと同一URL
+    def __over_city_rain_kobetu_1(self,ovsrvId:str="2152800100021"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={ovsrvId}&gamenId=02-0904&timeType=60&requestType=1")
+    # 時間雨量経過表(比較観測所3か所)
+    def __over_city_rain_kobetuMLT(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetuMlt.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0903")
+    # レーダ雨量(現況)(Cバンド)
+    def __over_city_radar_genkyo(self,areacode=80):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&areaCd={areacode}&gamenId=02-1801")
+    # レーダ雨量(累加)(Cバンド)
+    def __over_city_radar_ruika(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRuika.do?init=init&areaCd={areacode}&gamenId=02-1802")
+    # レーダ雨量(現況)(XRAIN)
+    def __over_city_radar_yosokuD(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarYosokuD.do?init=init&areaCd={areacode}&gamenId=02-1805")
+    # レーダ雨量(現況)(Cバンド)(気象庁)
+    # 現況の気象庁無verと同一URL
+    def __over_city_radar_genkyo_kisyou(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&areaCd={areacode}&gamenId=02-1801")
+    # レーダ雨量(履歴4分割)(Cバンド)(2枚)
+    def __over_city_radar_rerekiB(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRirekiB.do?init=init&areaCd={areacode}&gamenId=02-1804")
+
+    ### 一般向けの引数は適当に抽出、使用するときに調整必要
+    # 一般向け川の防災情報(雨量グラフ)
+    def __over_common_uryou(self,zm=15,ofcCd=15617,obsCd=127,lat:float=44.737,lon:float=142.1183611):
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/tm?zm=15&itmkndCd=1&ofcCd=15617&obsCd=127&fld=0&clat=44.737&clon=142.1183611&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1")
+    # 一般向け川の防災情報(XRAIN4分割)
+    def __over_common_xrain(self,zm=15,ofcCd=15617,obsCd=127,lat:float=44.737,lon:float=142.1183611):
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm=15&clat=44.737&clon=142.1183611&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=4&rdopa=50&rdint=5")
+    
+#### 水位関連 ####
+    # 水位グラフ
+    def __over_city_suii_kobetu(self,obsrvId:str="0153700400092"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=60")
+    # 水位グラフ(10分)
+    def __over_city_suii_kobetu(self,obsrvId:str="0153700400092"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=10")
+
+    # 時刻水位・流量グラフ
+    def __over_city_timesuii(self,obsrvId:str="0153700400092"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes")
+    # 時刻水位・流量グラフ(対象観測所)
+    # 上記と同一URL
+    def __over_city_timesuii_kobetu(self,obsrvId:str="0153700400092"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes")
+
+    # 時刻水位・流量グラフ(比較観測所)
+    def __over_city_timesuii_kobetuMLT(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetuMlt.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1004&stgGrpKind=survFore&fvrt=yes")
+
+    # 時刻水位・流量現況表
+    def __over_city_timesuii_genkyou(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiGenkyou.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1001&fvrt=yes")
+    # 時刻水位・流量経過表
+    def __over_city_timesuii_keika(self,areacode=84):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1002")
+
 
 ### 欠測・未受信(miss)
     
