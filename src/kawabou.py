@@ -29,6 +29,11 @@ class Kawabou(SiteBase):
 ############################################################################################
 ####            スクリーンショット　処理群                                              ######
 ############################################################################################
+    # 概況図スクリーンショット
+    def screenshot_gaikyo_map(self):
+        self.__city_top_gaikyo_map()
+        self.save_screenshot_png("city_top_gaikyo_map.png")
+
     # 雨量グラフスクリーンショット
     def screenshot_rain_graph(self,areacode=83):
         self.__rain_graph(areacode)
@@ -73,6 +78,10 @@ class Kawabou(SiteBase):
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
     
+    # 概況図ページ
+    # 地方選択方法がわからないので、引数なし、要確認
+    def __city_top_gaikyo_map(self):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do?init=init&gamenId=02-0201")
     # 雨量グラフページ
     def __rain_graph(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetuMlt.do?requestType=1&init=city&gamenId=02-0903&areaCd={areacode}&rvrsysCd=&prefCd=&townCd=")
@@ -102,7 +111,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_city_rain_keika()
+    kawabou.screenshot_gaikyo_map()
 
 if __name__ == "__main__":
     main()
