@@ -79,6 +79,18 @@ class Kawabou(SiteBase):
         self.__suii_keika_kobetu(areacode)
         self.save_screenshot_png("suii_keika_kobetu.png")
 
+    # 時刻ダム情報経過表
+    # 例は東京都
+    def screenshot_dam_keika(self,prefcode=1301):
+        self.__dam_keika(prefcode)
+        self.save_screenshot_png("dam_keika.png")
+
+    # 時刻ダム情報グラフ
+    # 例は白丸調整池
+    def screenshot_dam_kobetu(self,areacode:str="0332900700101"):
+        self.__dam_kobetu(areacode)
+        self.save_screenshot_png("dam_kobetu.png")
+
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
@@ -116,11 +128,26 @@ class Kawabou(SiteBase):
     def __suii_keika_kobetu(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={areacode}&gamenId=03-1005&stgGrpKind=survFore&fvrt=yes")
 
+    # 水位グラフ
+    # def __suii_kobetu(self,areacode):
+    #     self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={areacode}&gamenId=03-1005&stgGrpKind=survFore&fvrt=yes")
+
+    # 時刻ダム情報経過表
+    def __dam_keika(self,prefcode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?init=init&prefCd={prefcode}&townCd=&areaCd=&rvrsysCd=&gamenId=03-1101")
+
+    # 時刻ダム情報グラフ
+    def __dam_kobetu(self,areacode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1102&timeType=60&requestType=1")
+
+
+
 def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_suii_keika_kobetu()
+    kawabou.screenshot_dam_keika()
+    kawabou.screenshot_dam_kobetu()
 
 if __name__ == "__main__":
     main()
