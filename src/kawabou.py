@@ -115,6 +115,12 @@ class Kawabou(SiteBase):
         self.__kaigan_kobetu(areacode)
         self.save_screenshot_png("kaigan_kobetu.png")
 
+    # 時刻排水ポンプ場情報グラフ
+    # 例は利根機場
+    def screenshot_haisui_kobetu(self,areacode:str="2127300900001"):
+        self.__haisui_kobetu(areacode)
+        self.save_screenshot_png("haisui_kobetu.png")
+
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
@@ -179,6 +185,9 @@ class Kawabou(SiteBase):
     # 海岸グラフ
     def __kaigan_kobetu(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1202&timeType=60&requestType=1")
+    # 海岸グラフ
+    def __haisui_kobetu(self,areacode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={areacode}&gamenId=02-1502&timeType=60&requestType=1")
 
 
 
@@ -186,7 +195,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_kaigan_kobetu()
+    kawabou.screenshot_haisui_kobetu()
 
 if __name__ == "__main__":
     main()
