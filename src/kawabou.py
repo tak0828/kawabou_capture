@@ -46,10 +46,6 @@ class Kawabou(SiteBase):
         self.__rain_keika(prefcode)
         self.save_screenshot_png("rain_keika.png")
 
-    def screenshot_rain_graph_kobetu(self,areacode=2127900100003):
-        self.__rain_graph_kobetu(areacode)
-        self.save_screenshot_png("radar_genkyo_kobetu.png")
-
     # レーダ雨量（現況）Cバンドスクリーンショット
     def screenshot_radar_genkyo(self,prefcode=1301):
         self.__radar_genkyo(prefcode)
