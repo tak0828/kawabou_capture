@@ -103,6 +103,12 @@ class Kawabou(SiteBase):
         self.__suisitu_kobetu(areacode)
         self.save_screenshot_png("suisitu_kobetu.png")
 
+    # 堰グラフ
+    # 例は前川水門
+    def screenshot_weir_kobetu(self,areacode=83,prefcode:str="2127000800004"):
+        self.__weir_kobetu(areacode,prefcode)
+        self.save_screenshot_png("weir_kobetu.png")
+
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
 ############################################################################################
@@ -160,14 +166,17 @@ class Kawabou(SiteBase):
     def __suisitu_kobetu(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1302&timeType=60&requestType=1")
 
+    # 堰グラフ
+    def __weir_kobetu(self,areacode,prefcode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={prefcode}&gamenId=02-1402")
+
 
 
 def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_suisitu_keika()
-    kawabou.screenshot_suisitu_kobetu()
+    kawabou.screenshot_weir_kobetu()
 
 if __name__ == "__main__":
     main()
