@@ -46,6 +46,12 @@ class Kawabou(SiteBase):
         self.__city_rain_kobetu(areacode)
         self.save_screenshot_png("city_rain_kobetu.png")
 
+    # 市町村向け川の防災(経過表)スクリーンショット
+    # 例は、東京都
+    def screenshot_city_rain_keika(self,prefcode=1301):
+        self.__city_rain_keika(prefcode)
+        self.save_screenshot_png("city_rain_keika.png")
+
     # 時間雨量経過表スクリーンショット
     # 例は、東京都
     def screenshot_rain_keika(self,prefcode=1301):
@@ -77,6 +83,10 @@ class Kawabou(SiteBase):
     def __city_rain_kobetu(self,areacode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?obsrvId={areacode}&gamenId=03-0803&requestType=1&init=city")
 
+    # 市町村向け川の防災(経過表)
+    def __city_rain_keika(self,prefcode):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd={prefcode}&gamenId=03-0801")
+
     # 時間雨量経過表ページ
     def __rain_keika(self,prefcode):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd={prefcode}&gamenId=03-0801")
@@ -92,7 +102,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_city_rain_kobetu()
+    kawabou.screenshot_city_rain_keika()
 
 if __name__ == "__main__":
     main()
