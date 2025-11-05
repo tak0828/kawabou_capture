@@ -5,6 +5,10 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
 from datetime import datetime, timedelta
 import time
 import CONST
@@ -25,15 +29,70 @@ class Kawabou(SiteBase):
         self.driver.find_element(By.XPATH, '//*[@id="login"]').click()
         time.sleep(5)  # ログイン処理が終わるまで待機
 
+    # iframe内の操作
+    # 都道府県と地方で共通なので、外にプライベートとして用意
+    def __switch_into_area_iframe(self,wait):
+        self.driver.switch_to.default_content()
+        frame = wait.until(EC.presence_of_element_located((By.ID, "ctrlAreaRvrsysPrefTownFrm")))
+        self.driver.switch_to.frame(frame)
+        return frame
+    
+    def __choise_pref(self,prefcode:str=CONST.PREF_CODE['東京都']):
+        '''
+        概況図の都道府県を選択
+
+        :param str prefcode: CONST.PREF_CODEより都道府県を選択
+        '''
+        wait = WebDriverWait(self.driver, 20)
+
+        wait.until(lambda d: d.execute_script("return document.readyState") == "complete")
+
+    
+        # 2) iFrameに入る
+        frame_el = self.__switch_into_area_iframe(wait)
+
+        pref_sel = wait.until(EC.element_to_be_clickable((By.ID, "form1_commonForm_selectPref")))
+        Select(pref_sel).select_by_value(prefcode)
+        link = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@onclick,'showPrefTown')]")))
+        link.click()
+    
+    def __choise_area(self,areacode:str=CONST.AREA_CODE['全国']):
+        '''
+        概況図の都道府県を選択
+
+        :param str prefcode: CONST.PREF_CODEより都道府県を選択
+        '''
+        wait = WebDriverWait(self.driver, 20)
+
+        wait.until(lambda d: d.execute_script("return document.readyState") == "complete")
+
+        # 2) iFrameに入る
+        frame_el = self.__switch_into_area_iframe(wait)
+
+        pref_sel = wait.until(EC.element_to_be_clickable((By.ID, "form1_commonForm_selectArea")))
+        Select(pref_sel).select_by_value(areacode)
+        link = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@onclick,'showAreaRvrs')]")))
+        link.click()
 
 ############################################################################################
 ####            スクリーンショット　処理群                                              ######
 ############################################################################################
 
 ### 概況図
-    def screenshot_gaikyo(self,pngname:str="gaikyou.png"):
-        self.login()
-        self.__gaikyo()
+    def screenshot_pref_gaikyo(self,prefname:str="和歌山県",pngname:str="pref_gaikyou.png"):
+        '''
+        都道府県キャプチャ
+        '''
+        self.__pref_gaikyo(prefname)
+        time.sleep(5)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_area_gaikyo(self,areaname:str="全国",pngname:str="area_gaikyou.png"):
+        '''
+        地方キャプチャ
+        '''
+        self.__area_gaikyo(areaname)
+        time.sleep(5)
         self.save_screenshot_png(pngname)
 
 
@@ -156,8 +215,26 @@ class Kawabou(SiteBase):
 ############################################################################################
 
 ### 概況図
-    def __gaikyo(self):
+
+    # 都道府県概況図
+    def __pref_gaikyo(self,prefname):
+        '''
+        都道府県概況図
+
+        :param str prefname: 都道府県の名前(例:"東京都") CONST.PREF_CODEを確認すること
+        '''
         self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do")
+        self.__choise_pref(CONST.PREF_CODE[prefname])
+
+    # 地方概況図
+    def __area_gaikyo(self,areaname):
+        '''
+        地方概況図
+
+        :param str areaname: 都道府県の名前(例:"全国") CONST.AREA_CODEを確認
+        '''
+        self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do")
+        self.__choise_area(CONST.AREA_CODE[areaname])
 
 ### 基準値超過(over) ###
 
@@ -269,6 +346,8 @@ class Kawabou(SiteBase):
     def __over_city_daysuisitu_kobetuDt1(self,areacode=84,obsrvId:str="2152800600001"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDayDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1308")
 
+#### ダム関連 ####
+
 
 ### 欠測・未受信(miss)
     
@@ -342,7 +421,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_miss_haisui_kobetu()
+    kawabou.screenshot_area_gaikyo("四国")
 
 if __name__ == "__main__":
     main()
