@@ -405,6 +405,20 @@ class Kawabou(SiteBase):
     def __over_city_kaigan_genkyo(self,areacode:str="90"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganGenkyou.do?init=init&areaCd={areacode}&gamenId=02-1201")
 
+#### 排水関連 ####
+    # 時刻排水ポンプ場情報グラフ
+    def __over_city_haisui_kobetu(self,obsrvId:str="2329700900001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=60&requestType=1")
+    # # 時刻排水ポンプ場情報グラフ(2枚)　はてなとなっている
+    # def __over_city_haisui_keika(self,areacode:str="81"):
+    #     self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKeika.do?init=init&areaCd={areacode}&gamenId=02-1202")
+    # 時刻排水ポンプ場情報グラフ(対象観測所)
+    def __over_city_haisui_kobetu_target(self,obsrvId:str="2127300900001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=60&requestType=1")
+    # 時刻排水ポンプ場情報グラフ詳細表
+    def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
+
 ### 欠測・未受信(miss)
     
     # 概況図ページ
