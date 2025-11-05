@@ -29,6 +29,10 @@ class Kawabou(SiteBase):
         self.driver.find_element(By.XPATH, '//*[@id="login"]').click()
         time.sleep(5)  # ログイン処理が終わるまで待機
 
+
+############################################################################################
+####            iframe内　処理群(概況図)                                              ######
+############################################################################################
     # iframe内の操作
     # 都道府県と地方で共通なので、外にプライベートとして用意
     def __switch_into_area_iframe(self,wait):
@@ -84,7 +88,6 @@ class Kawabou(SiteBase):
         都道府県キャプチャ
         '''
         self.__pref_gaikyo(prefname)
-        time.sleep(5)
         self.save_screenshot_png(pngname)
 
     def screenshot_area_gaikyo(self,areaname:str="全国",pngname:str="area_gaikyou.png"):
@@ -92,7 +95,6 @@ class Kawabou(SiteBase):
         地方キャプチャ
         '''
         self.__area_gaikyo(areaname)
-        time.sleep(5)
         self.save_screenshot_png(pngname)
 
 
@@ -347,7 +349,32 @@ class Kawabou(SiteBase):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDayDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1308")
 
 #### ダム関連 ####
-
+    # ダムグラフ(10分)
+    def __over_city_dam_kobetu(self,obsrvId:str="2152800700001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?obsrvId={obsrvId}&gamenId=02-1104&fvrt=yes&timeType=10")
+    # 時刻ダム情報グラフ
+    def __over_city_dam_info(self,obsrvId:str="0025700700001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId{obsrvId}=&gamenId=02-1104&timeType=60&requestType=1")
+    # 時刻ダム情報グラフ(対象観測所)
+    # 上記と同じURL
+    def __over_city_dam_info_target(self,obsrvId:str="0204900700006"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1104&timeType=60&requestType=1")
+    # 時刻ダム情報グラフ(10分)
+    def __over_city_dam_info_target_dt10(self,obsrvId:str="0025700700001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?obsrvId={obsrvId}&gamenId=02-1104&fvrt=yes&timeType=10")
+    # 時刻ダム情報詳細表
+    def __over_city_dam_info_kobetu_dt10(self,obsrvId:str="0025700700001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?obsrvId={obsrvId}&gamenId=02-1104&fvrt=yes&timeType=10")
+    # 時刻ダム情報詳細表(対象観測所)
+    # 時刻ダム情報グラフ(10分)からここまで同じURL
+    def __over_city_dam_info_kobetu_target_dt10(self,obsrvId:str="0025700700001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?obsrvId={obsrvId}&gamenId=02-1104&fvrt=yes&timeType=10")
+    # 時刻ダム情報経過表
+    def __over_city_dam_info_keika(self,areacode:str="81"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1102")
+    # 時刻ダム情報詳細表(10分)
+    def __over_city_dam_info_keiak_dt10(self,areacode:str="81"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1102&fvrt=yes&timeType=10")
 
 ### 欠測・未受信(miss)
     
