@@ -376,6 +376,18 @@ class Kawabou(SiteBase):
     def __over_city_dam_info_keiak_dt10(self,areacode:str="81"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1102&fvrt=yes&timeType=10")
 
+#### 積雪関連 ####
+    # 時刻積雪深グラフ
+    def __over_city_snow_kobetu(self,obsrvId:str="2075700300016"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySnowKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1602&timeType=60&requestType=1")
+    # 時刻積雪深グラフ(対象観測所)
+    # 同様URL
+    def __over_city_snow_kobetu_target(self,obsrvId:str="2075700300016"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySnowKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1602&timeType=60&requestType=1")
+    # 時刻積雪深経過表
+    def __over_city_snow_keika(self,areacode:str="81"):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySnowKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1601")
+
 ### 欠測・未受信(miss)
     
     # 概況図ページ
