@@ -117,6 +117,89 @@ class Kawabou(SiteBase):
         self.login()
         self.__over_city_radar_ruika()
         self.save_screenshot_png(pngname)
+#### 水位 ####
+    # 時刻水位・流量グラフ(対象観測所)スクリーンショット
+    def screenshot_over_city_timesuii_kobetu(self,pngname:str="over_city_timesuii_kobetu.png"):
+        '''
+        時刻水位・流量グラフ(対象観測所)スクリーンショット
+        '''
+        self.login()
+        self.__over_city_timesuii_kobetu()
+        self.save_screenshot_png(pngname)
+
+    # 時刻水位・流量グラフ(比較観測所1か所)
+    def screenshot_over_city_timesuii_kobetuMLT(self,pngname:str="over_city_timesuii_kobetuMLT.png"):
+        '''
+        時刻水位・流量グラフ(比較観測所1か所)
+        '''
+        self.login()
+        self.__over_city_timesuii_kobetuMLT()
+        self.save_screenshot_png(pngname)
+
+#### ダム ####
+    # 時刻ダム情報スクリーンショット
+    def screenshot_over_city_dam_info(self,pngname:str="over_city_dam_info.png"):
+        '''
+        時刻ダム情報スクリーンショット
+        '''
+        self.login()
+        self.__over_city_dam_info()
+        self.save_screenshot_png(pngname)
+
+#### 水質 ####
+    # 時刻水質経過表スクリーンショット
+    def screenshot_over_city_timesuisitu_keika(self,pngname:str="over_city_timesuisitu_keika.png"):
+        '''
+        時刻水質経過表スクリーンショット
+        '''
+        self.login()
+        self.__over_city_timesuisitu_keika()
+        self.save_screenshot_png(pngname)
+    # 時刻水質グラフスクリーンショット
+    def screenshot_over_city_suisitu_kobetu(self,pngname:str="over_city_suisitu_kobetu.png"):
+        '''
+        時刻水質グラフスクリーンショット
+        '''
+        self.login()
+        self.__over_city_suisitu_kobetu()
+        self.save_screenshot_png(pngname)
+    # 時刻水質詳細表スクリーンショット
+    def screenshot_over_city_timesuisitu_kobetuDt1(self,pngname:str="over_city_timesuisitu_kobetuDt1.png"):
+        '''
+        時刻水質詳細表スクリーンショット
+        '''
+        self.login()
+        self.__over_city_timesuisitu_kobetuDt1()
+        self.save_screenshot_png(pngname)
+
+#### 排水機場 ####
+    def screenshot_over_city_haisui_kobetu_target(self,pngname:str="over_city_haisui_kobetu_target.png"):
+        '''
+        時刻排水ポンプ場情報グラフ(対象観測所)スクリーンショット
+        '''
+        self.login()
+        self.__over_city_haisui_kobetu_target()
+        self.save_screenshot_png(pngname)
+
+#### 積雪深 ####
+    def screenshot_over_city_snow_kobetu_target(self,pngname:str="over_city_snow_kobetu_target.png"):
+        '''
+        時刻積雪深グラフ(対象観測所)スクリーンショット
+        '''
+        self.login()
+        self.__over_city_snow_kobetu_target()
+        self.save_screenshot_png(pngname)
+
+#### 気象 ####
+    def screenshot_over_city_weather_kobetu(self,pngname:str="over_city_weather_kobetu.png"):
+        '''
+        時刻気象詳細表スクリーンショット
+        '''
+        self.login()
+        self.__over_city_weather_kobetu()
+        self.save_screenshot_png(pngname)
+    
+
 
 ### 欠測・未受信(miss)
 
@@ -513,7 +596,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_area_gaikyo("四国")
+    kawabou.screenshot_area_gaikyo("中国")
 
 if __name__ == "__main__":
     main()

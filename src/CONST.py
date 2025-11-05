@@ -98,3 +98,8 @@ LOG_DIR = os.getenv("LOG_DIR", "./logs")
 class MODE:
     timing = "timing"
     absolute = "absolute"
+
+@dataclass
+class Area:
+    name:str
+    code:str
