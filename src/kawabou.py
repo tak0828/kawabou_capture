@@ -437,7 +437,7 @@ class Kawabou(SiteBase):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?obsrvId={obsrvId}&gamenId=02-1104&fvrt=yes&timeType=10")
     # 時刻ダム情報グラフ
     def __over_city_dam_info(self,obsrvId:str="0025700700001"):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId{obsrvId}=&gamenId=02-1104&timeType=60&requestType=1")
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1104&timeType=60&requestType=1")
     # 時刻ダム情報グラフ(対象観測所)
     # 上記と同じURL
     def __over_city_dam_info_target(self,obsrvId:str="0204900700006"):
