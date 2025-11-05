@@ -419,6 +419,28 @@ class Kawabou(SiteBase):
     def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
 
+#### 気象関連 ####
+    # 気象現況表
+    def __over_city_weather_genkyo(self,areacode:str="84"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherGenkyou.do?init=init&areaCd={areacode}&gamenId=02-1701")
+    # 気象詳細表
+    def __over_city_weather_kobetu(self,obsrvId:str="2154601300001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1702&timeType=60&requestType=1")
+    # 気象詳細表(前日)
+    def __over_city_haisui_kobetu_target_yes(self,obsrvId:str="2154601300001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?obsrvId={obsrvId}&gamenId=02-1702&fvrt=yes")
+    # # 気象詳細表(天気図)不明のためコメント
+    # def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
+    #     self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
+
+#### 堰関連 ####
+    # 堰グラフ
+    def __over_city_weir_kobetu(self,areacode:str="83",obsrvId:str="2127000800004"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1402")
+    # 堰グラフ(10分)
+    def __over_city_weir_kobetu_dt10(self,obsrvId:str="2127000800004"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?obsrvId={obsrvId}&gamenId=02-1402&fvrt=yes&timeType=10")
+
 ### 欠測・未受信(miss)
     
     # 概況図ページ
