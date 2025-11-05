@@ -388,6 +388,23 @@ class Kawabou(SiteBase):
     def __over_city_snow_keika(self,areacode:str="81"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySnowKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1601")
 
+#### 海岸関連 ####
+    # 時刻海岸情報グラフ
+    def __over_city_kaigan_kobetu(self,obsrvId:str="2081701200001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1203&timeType=60&requestType=1")
+    # 時刻海岸情報経過表
+    def __over_city_kaigan_keika(self,areacode:str="81"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKeika.do?init=init&areaCd={areacode}&gamenId=02-1202")
+    # 海岸2か月データ
+    def __over_city_kaigan_2mon(self,areacode:str="90",obsrvId:str="1622001200001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/dataOutPre.do?gamenId=02-2001&gamenIdPrnt=02-1203&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&timeType=60&timeType2=10&yokeiObsrvs=&kanriKubuns=&dispDataTypes=&foreStgKind=usual&dispTeles=&basinDataType=&dispShogens=&dispRuika=")
+    # 海岸詳細表
+    def __over_city_kaigan_kobetu_dt1(self,areacode:str="81",obsrvId:str="2081701200001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1204")
+    # 海岸現況表
+    def __over_city_kaigan_genkyo(self,areacode:str="90"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganGenkyou.do?init=init&areaCd={areacode}&gamenId=02-1201")
+
 ### 欠測・未受信(miss)
     
     # 概況図ページ
