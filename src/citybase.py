@@ -25,8 +25,13 @@ class CityBase:
         '''
         IDW(注意フラグ)
         '''
-        self.kawabou.screenshot_over_city_rain_kobetu()
         print("idw_caution")
+    
+    def disp_zero(self):
+        '''
+        降雨時の0.0mm表示
+        '''
+        print("disp_zero")
 
 
 def main():
