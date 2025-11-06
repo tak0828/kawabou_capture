@@ -96,7 +96,7 @@ class Kawabou(SiteBase):
         '''
         地方キャプチャ
 
-        :param str areaname : 地方名
+        :param str areaname: 地方名
         :param str pngname: ファイル名
         '''
         self.__area_gaikyo(areaname)
@@ -110,7 +110,7 @@ class Kawabou(SiteBase):
         '''
         雨量グラフ(10分)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -122,7 +122,7 @@ class Kawabou(SiteBase):
         '''
         時間雨量経過表ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -134,7 +134,7 @@ class Kawabou(SiteBase):
         '''
         時間雨量経過表(対象観測所1か所)ページスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -168,7 +168,7 @@ class Kawabou(SiteBase):
         '''
         レーダ雨量(現況)(Cバンド)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -191,7 +191,7 @@ class Kawabou(SiteBase):
         '''
         レーダ雨量(現況)(XRAIN)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -203,7 +203,7 @@ class Kawabou(SiteBase):
         '''
         レーダ雨量(現況)(Cバンド)(気象庁)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -215,7 +215,7 @@ class Kawabou(SiteBase):
         '''
         レーダ雨量(履歴4分割)(Cバンド)(2枚)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -228,7 +228,7 @@ class Kawabou(SiteBase):
         '''
         水位グラフページスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -240,7 +240,7 @@ class Kawabou(SiteBase):
         '''
         水位グラフ(10分)ページスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -252,7 +252,7 @@ class Kawabou(SiteBase):
         '''
         時刻水位・流量グラフページスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -264,7 +264,7 @@ class Kawabou(SiteBase):
         '''
         時刻水位・流量現況表ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -276,7 +276,7 @@ class Kawabou(SiteBase):
         '''
         時刻水位・流量経過表ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -311,7 +311,7 @@ class Kawabou(SiteBase):
         '''
         ダムグラフ(10分)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -334,7 +334,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報グラフ(対象観測所)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -346,7 +346,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報グラフ(10分)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -358,7 +358,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報詳細表スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -370,7 +370,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報詳細表(対象観測所)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -382,7 +382,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報経過表スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -394,7 +394,7 @@ class Kawabou(SiteBase):
         '''
         時刻ダム情報詳細表(10分)スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -417,8 +417,9 @@ class Kawabou(SiteBase):
         '''
         時刻水質グラフスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
+
         '''
         self.login()
         self.__over_city_suisitu_kobetu(ovsrvId)
@@ -428,8 +429,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_suisitu_kobetu_1(self,ovsrvId="2152800600001",pngname:str="over_city_suisitu_kobetu_1.png"):
         '''
         時刻水質グラフ(対象観測所)ページスクリーンショット
-
-        :param str ovsrvId : 観測所コード
+        
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -452,7 +453,7 @@ class Kawabou(SiteBase):
         '''
         水質経過表ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -464,7 +465,7 @@ class Kawabou(SiteBase):
         '''
         水質詳細表ページスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -476,7 +477,7 @@ class Kawabou(SiteBase):
         '''
         時刻水質現況表ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -488,7 +489,7 @@ class Kawabou(SiteBase):
         '''
         時刻水質経過表(対象観測所)ページスクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -500,8 +501,8 @@ class Kawabou(SiteBase):
         '''
         日水質詳細表ページスクリーンショット
 
-        :param str areacode : 地方コード
-        :param str ovsrvId : 観測所コード
+        :param str areacode: 地方コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -523,7 +524,7 @@ class Kawabou(SiteBase):
         '''
         時刻排水ポンプ場情報グラフスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -534,8 +535,8 @@ class Kawabou(SiteBase):
         '''
         時刻排水ポンプ場情報グラフ詳細表スクリーンショット
 
-        :param str areacode : 地方コード
-        :param str ovsrvId : 観測所コード
+        :param str areacode: 地方コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -548,7 +549,7 @@ class Kawabou(SiteBase):
         '''
         堰グラフグラフスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -559,7 +560,7 @@ class Kawabou(SiteBase):
         '''
         堰グラフ(10分)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -571,7 +572,7 @@ class Kawabou(SiteBase):
         '''
         時刻積雪深グラフスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -582,7 +583,7 @@ class Kawabou(SiteBase):
         '''
         時刻積雪深グラフ(対象観測所)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -593,7 +594,7 @@ class Kawabou(SiteBase):
         '''
         時刻積雪深経過表スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -605,7 +606,7 @@ class Kawabou(SiteBase):
         '''
         時刻海岸情報グラフスクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -616,8 +617,8 @@ class Kawabou(SiteBase):
         '''
         海岸2か月データスクリーンショット
 
-        :param str areacode : 地方コード
-        :param str ovsrvId : 観測所コード
+        :param str areacode: 地方コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -628,8 +629,8 @@ class Kawabou(SiteBase):
         '''
         海岸詳細表スクリーンショット
 
-        :param str areacode : 地方コード
-        :param str ovsrvId : 観測所コード
+        :param str areacode: 地方コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -640,7 +641,7 @@ class Kawabou(SiteBase):
         '''
         時刻海岸情報経過表スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -651,7 +652,7 @@ class Kawabou(SiteBase):
         '''
         海岸現況表スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -673,7 +674,7 @@ class Kawabou(SiteBase):
         '''
         気象現況表スクリーンショット
 
-        :param str areacode : 地方コード
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -684,7 +685,7 @@ class Kawabou(SiteBase):
         '''
         気象詳細表(前日)スクリーンショット
 
-        :param str ovsrvId : 観測所コード
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
