@@ -223,6 +223,66 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 #### 水位 ####
+    # 水位グラフページスクリーンショット
+    def screenshot_over_city_suii_kobetu_dt60(self,ovsrvId="0153700400092",pngname:str="over_city_suii_kobetu60.png"):
+        '''
+        水位グラフページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_suii_kobetu_dt60(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 水位グラフ(10分)ページスクリーンショット
+    def screenshot_over_city_suii_kobetu_dt10(self,ovsrvId="0153700400092",pngname:str="over_city_suii_kobetu10.png"):
+        '''
+        水位グラフ(10分)ページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_suii_kobetu_dt10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻水位・流量グラフページスクリーンショット
+    def screenshot_over_city_timesuii(self,ovsrvId="0153700400092",pngname:str="over_city_timesuii.png"):
+        '''
+        時刻水位・流量グラフページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuii(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻水位・流量現況表ページスクリーンショット
+    def screenshot_over_city_timesuii_genkyou(self,areacode="84",pngname:str="over_city_timesuii_genkyou.png"):
+        '''
+        時刻水位・流量現況表ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuii_genkyou(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 時刻水位・流量経過表ページスクリーンショット
+    def screenshot_over_city_timesuii_keika(self,areacode="84",pngname:str="over_city_timesuii_keika.png"):
+        '''
+        時刻水位・流量経過表ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuii_keika(areacode)
+        self.save_screenshot_png(pngname)
+
     # 時刻水位・流量グラフ(対象観測所)スクリーンショット
     def screenshot_over_city_timesuii_kobetu(self,pngname:str="over_city_timesuii_kobetu.png"):
         '''
@@ -482,7 +542,7 @@ class Kawabou(SiteBase):
     def __over_city_radar_rirekiB(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRirekiB.do?init=init&areaCd={areacode}&gamenId=02-1804")
 
-    ### 一般向けの引数は適当に抽出、使用するときに調整必要
+### 一般向けの引数は適当に抽出、使用するときに調整必要
     # 一般向け川の防災情報(雨量グラフ)
     def __over_common_uryou(self,zm=15,ofcCd=15617,obsCd=127,lat:float=44.737,lon:float=142.1183611):
         self.get_page(f"https://www.river.go.jp/kawabou/pc/tm?zm=15&itmkndCd=1&ofcCd=15617&obsCd=127&fld=0&clat=44.737&clon=142.1183611&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1")
@@ -492,10 +552,10 @@ class Kawabou(SiteBase):
     
 #### 水位関連 ####
     # 水位グラフ
-    def __over_city_suii_kobetu(self,obsrvId:str="0153700400092"):
+    def __over_city_suii_kobetu_dt60(self,obsrvId:str="0153700400092"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=60")
     # 水位グラフ(10分)
-    def __over_city_suii_kobetu(self,obsrvId:str="0153700400092"):
+    def __over_city_suii_kobetu_dt10(self,obsrvId:str="0153700400092"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=10")
 
     # 時刻水位・流量グラフ
@@ -719,7 +779,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_radar_rirekiB()
+    kawabou.screenshot_over_city_timesuii_keika()
 
 if __name__ == "__main__":
     main()
