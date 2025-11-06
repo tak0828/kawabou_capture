@@ -689,91 +689,182 @@ class Kawabou(SiteBase):
         self.save_screenshot_png("city_top_gaikyo_map.png")
 
     # 雨量グラフスクリーンショット
-    def screenshot_miss_rain_graph(self,areacode=83):
+    def screenshot_miss_rain_graph(self,areacode:str="83",pngname:str="rain_graph.png"):
+        '''
+        雨量グラフスクリーンショット
+
+        :param str areacode: 地方コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_rain_graph(areacode)
-        self.save_screenshot_png("rain_graph.png")
+        self.save_screenshot_png(pngname)
     
     # 雨量グラフ(対象観測所)スクリーンショット
     # 例は、篠崎
-    def screenshot_miss_rain_graph_kobetu(self,areacode=2127900100003):
+    def screenshot_miss_rain_graph_kobetu(self,areacode="2127900100003",pngname:str="rain_graph_kobetu.png"):
+        '''
+        雨量グラフ(対象観測所)スクリーンショット
+
+        :param str areacode: 地方コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_rain_graph_kobetu(areacode)
-        self.save_screenshot_png("rain_graph_kobetu.png")
+        self.save_screenshot_png(pngname)
 
     # 市町村向け川の防災(時間雨量グラフ)スクリーンショット
     # 例は、篠崎
-    def screenshot_miss_city_rain_kobetu(self,areacode=2127900100003):
+    def screenshot_miss_city_rain_kobetu(self,areacode="2127900100003",pngname:str="city_rain_kobetu.png"):
+        '''
+        市町村向け川の防災(時間雨量グラフ)スクリーンショット
+
+        :param str areacode: 地方コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_city_rain_kobetu(areacode)
-        self.save_screenshot_png("city_rain_kobetu.png")
+        self.save_screenshot_png(pngname)
 
     # 市町村向け川の防災(経過表)スクリーンショット
     # 例は、東京都
-    def screenshot_miss_city_rain_keika(self,prefcode=1301):
+    def screenshot_miss_city_rain_keika(self,prefcode="1301",pngname:str="city_rain_keika.png"):
+        '''
+        市町村向け川の防災(経過表)スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_city_rain_keika(prefcode)
-        self.save_screenshot_png("city_rain_keika.png")
+        self.save_screenshot_png(pngname)
 
     # 時間雨量経過表スクリーンショット
     # 例は、東京都
-    def screenshot_miss_rain_keika(self,prefcode=1301):
+    def screenshot_miss_rain_keika(self,prefcode="1301",pngname:str="rain_keika.png"):
+        '''
+        時間雨量経過表スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_rain_keika(prefcode)
-        self.save_screenshot_png("rain_keika.png")
+        self.save_screenshot_png(pngname)
 
     # レーダ雨量（現況）Cバンドスクリーンショット
-    def screenshot_miss_radar_genkyo(self,prefcode=1301):
+    def screenshot_miss_radar_genkyo(self,prefcode="1301",pngname:str="radar_genkyo.png"):
+        '''
+        レーダ雨量（現況）Cバンドスクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_radar_genkyo(prefcode)
-        self.save_screenshot_png("radar_genkyo.png")
+        self.save_screenshot_png(pngname)
 
     # 時刻水位・流量経過表
     # 例は東京都
-    def screenshot_miss_suii_keika(self,prefcode=1301):
+    def screenshot_miss_suii_keika(self,prefcode="1301",pngname:str="suii_keika.png"):
+        '''
+        時刻水位・流量経過表スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_suii_keika(prefcode)
-        self.save_screenshot_png("suii_keika.png")
+        self.save_screenshot_png(pngname)
     # 時刻水位・流量経過表
     # 例は高砂
-    def screenshot_miss_suii_keika_kobetu(self,areacode=2127900400049):
+    def screenshot_miss_suii_keika_kobetu(self,areacode="2127900400049",pngname:str="suii_keika_kobetu.png"):
+        '''
+        時刻水位・流量経過表ページ(対象観測所)スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_suii_keika_kobetu(areacode)
-        self.save_screenshot_png("suii_keika_kobetu.png")
+        self.save_screenshot_png(pngname)
 
     # 時刻ダム情報経過表
     # 例は東京都
-    def screenshot_miss_dam_keika(self,prefcode=1301):
+    def screenshot_miss_dam_keika(self,prefcode="1301",pngname:str="dam_keika.png"):
+        '''
+        時刻ダム情報経過表スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_dam_keika(prefcode)
-        self.save_screenshot_png("dam_keika.png")
+        self.save_screenshot_png(pngname)
 
     # 時刻ダム情報グラフ
     # 例は白丸調整池
-    def screenshot_miss_dam_kobetu(self,areacode:str="0332900700101"):
-        self.__miss_dam_kobetu(areacode)
-        self.save_screenshot_png("dam_kobetu.png")
+    def screenshot_miss_dam_kobetu(self,ovsrvId:str="0332900700101",pngname:str="dam_kobetu.png"):
+        '''
+        時刻ダム情報グラフスクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.__miss_dam_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
 
     # 時刻水質情報経過表
     # 例は東京都
-    def screenshot_miss_suisitu_keika(self,prefcode=1301):
+    def screenshot_miss_suisitu_keika(self,prefcode="1301",pngname:str="suisitu_keika.png"):
+        '''
+        時刻水質情報経過表スクリーンショット
+
+        :param str prefcode: 都道府県コード
+        :param str pngname: ファイル名
+        '''
         self.__miss_suisitu_keika(prefcode)
-        self.save_screenshot_png("suisitu_keika.png")
+        self.save_screenshot_png(pngname)
 
     # 時刻水質情報グラフ
     # 例は京葉大橋平均
-    def screenshot_miss_suisitu_kobetu(self,areacode:str="2127900600025"):
-        self.__miss_suisitu_kobetu(areacode)
-        self.save_screenshot_png("suisitu_kobetu.png")
+    def screenshot_miss_suisitu_kobetu(self,ovsrvId:str="2127900600025",pngname:str="suisitu_kobetu.png"):
+        '''
+        時刻水質情報グラフスクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.__miss_suisitu_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
 
     # 堰グラフ
     # 例は前川水門
-    def screenshot_miss_weir_kobetu(self,areacode=83,prefcode:str="2127000800004"):
-        self.__miss_weir_kobetu(areacode,prefcode)
-        self.save_screenshot_png("weir_kobetu.png")
+    def screenshot_miss_weir_kobetu(self,areacode="83",ovsrvId:str="2127000800004",pngname:str="weir_kobetu.png"):
+        '''
+        堰グラフスクリーンショット
+
+        :param str areacode: 地方コード
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.__miss_weir_kobetu(areacode,ovsrvId)
+        self.save_screenshot_png(pngname)
 
     # 海岸グラフ
     # 例は東京(晴海)
-    def screenshot_miss_kaigan_kobetu(self,areacode:str="1617201200001"):
-        self.__miss_kaigan_kobetu(areacode)
-        self.save_screenshot_png("kaigan_kobetu.png")
+    def screenshot_miss_kaigan_kobetu(self,ovsrvId:str="1617201200001",pngname:str="kaigan_kobetu.png"):
+        '''
+        海岸グラフスクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.__miss_kaigan_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
 
     # 時刻排水ポンプ場情報グラフ
     # 例は利根機場
-    def screenshot_miss_haisui_kobetu(self,areacode:str="2127300900001"):
-        self.__miss_haisui_kobetu(areacode)
-        self.save_screenshot_png("haisui_kobetu.png")
+    def screenshot_miss_haisui_kobetu(self,ovsrvId:str="2127300900001",pngname:str="haisui_kobetu.png"):
+        '''
+        時刻排水ポンプ場情報グラフスクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.__miss_haisui_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
 
 ############################################################################################
 ####            ページ表示 処理群                                                      ######
@@ -1008,32 +1099,32 @@ class Kawabou(SiteBase):
     def __miss_city_top_gaikyo_map(self):
         self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do?init=init&gamenId=02-0201")
     # 雨量グラフページ
-    def __miss_rain_graph(self,areacode):
+    def __miss_rain_graph(self,areacode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetuMlt.do?requestType=1&init=city&gamenId=02-0903&areaCd={areacode}&rvrsysCd=&prefCd=&townCd=")
     # 雨量グラフ(対象観測所)ページ
-    def __miss_rain_graph_kobetu(self,areacode):
+    def __miss_rain_graph_kobetu(self,areacode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={areacode}&gamenId=03-0803&timeType=60&requestType=1")
     # 市町村向け川の防災(時間雨量グラフ)
-    def __miss_city_rain_kobetu(self,areacode):
+    def __miss_city_rain_kobetu(self,areacode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?obsrvId={areacode}&gamenId=03-0803&requestType=1&init=city")
 
     # 市町村向け川の防災(経過表)
-    def __miss_city_rain_keika(self,prefcode):
+    def __miss_city_rain_keika(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd={prefcode}&gamenId=03-0801")
 
     # 時間雨量経過表ページ
-    def __miss_rain_keika(self,prefcode):
+    def __miss_rain_keika(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd={prefcode}&gamenId=03-0801")
     # レーダ雨量（現況）Cバンド
-    def __miss_radar_genkyo(self,prefcode):
+    def __miss_radar_genkyo(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&prefCd={prefcode}&gamenId=03-1801")
 
     # 時刻水位・流量経過表ページ
-    def __miss_suii_keika(self,prefcode):
+    def __miss_suii_keika(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?requestType=1&init=city&gamenId=03-1001&areaCd=&rvrsysCd=&prefCd={prefcode}&townCd=&stgGrpKind=crsSect")
 
     # 時刻水位・流量経過表ページ(対象観測所)
-    def __miss_suii_keika_kobetu(self,areacode):
+    def __miss_suii_keika_kobetu(self,areacode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={areacode}&gamenId=03-1005&stgGrpKind=survFore&fvrt=yes")
 
     # 水位グラフ
@@ -1041,31 +1132,31 @@ class Kawabou(SiteBase):
     #     self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={areacode}&gamenId=03-1005&stgGrpKind=survFore&fvrt=yes")
 
     # 時刻ダム情報経過表
-    def __miss_dam_keika(self,prefcode):
+    def __miss_dam_keika(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?init=init&prefCd={prefcode}&townCd=&areaCd=&rvrsysCd=&gamenId=03-1101")
 
     # 時刻ダム情報グラフ
-    def __miss_dam_kobetu(self,areacode):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1102&timeType=60&requestType=1")
+    def __miss_dam_kobetu(self,obsrvId:str):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityDamKobetu.do?init=init&obsrvId={obsrvId}&gamenId=03-1102&timeType=60&requestType=1")
 
     # 時刻水質経過表
-    def __miss_suisitu_keika(self,prefcode):
+    def __miss_suisitu_keika(self,prefcode:str):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeika.do?init=init&prefCd={prefcode}&townCd=&areaCd=&rvrsysCd=&gamenId=03-1301")
 
     # 時刻水質グラフ
-    def __miss_suisitu_kobetu(self,areacode):
-        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1302&timeType=60&requestType=1")
+    def __miss_suisitu_kobetu(self,obsrvId:str):
+        self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetu.do?init=init&obsrvId={obsrvId}&gamenId=03-1302&timeType=60&requestType=1")
 
     # 堰グラフ
-    def __miss_weir_kobetu(self,areacode,prefcode):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={prefcode}&gamenId=02-1402")
+    def __miss_weir_kobetu(self,areacode:str,obsrvId:str):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1402")
 
     # 海岸グラフ
-    def __miss_kaigan_kobetu(self,areacode):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetu.do?init=init&obsrvId={areacode}&gamenId=03-1202&timeType=60&requestType=1")
+    def __miss_kaigan_kobetu(self,obsrvId:str):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetu.do?init=init&obsrvId={obsrvId}&gamenId=03-1202&timeType=60&requestType=1")
     # 海岸グラフ
-    def __miss_haisui_kobetu(self,areacode):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={areacode}&gamenId=02-1502&timeType=60&requestType=1")
+    def __miss_haisui_kobetu(self,obsrvId:str):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=60&requestType=1")
 
 
 
