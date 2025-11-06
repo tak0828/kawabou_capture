@@ -553,6 +553,64 @@ class Kawabou(SiteBase):
         self.__over_city_snow_keika(areacode)
         self.save_screenshot_png(pngname)
 
+#### 海岸 ####
+    def screenshot_over_city_kaigan_kobetu(self,ovsrvId="2081701200001",pngname:str="over_city_kaigan_kobetu.png"):
+        '''
+        時刻海岸情報グラフスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_kaigan_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_kaigan_2mon(self,areacode="90",ovsrvId="1622001200001",pngname:str="over_city_kaigan_2mon.png"):
+        '''
+        海岸2か月データスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_kaigan_2mon(areacode,ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_kaigan_kobetu_dt1(self,areacode="81",ovsrvId="2081701200001",pngname:str="over_city_kaigan_kobetu_dt1.png"):
+        '''
+        海岸詳細表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_kaigan_kobetu_dt1(areacode,ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_kaigan_keika(self,areacode="81",pngname:str="over_city_kaigan_keika.png"):
+        '''
+        時刻海岸情報経過表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_kaigan_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_kaigan_genkyo(self,areacode="90",pngname:str="over_city_kaigan_genkyo.png"):
+        '''
+        海岸現況表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_kaigan_genkyo(areacode)
+        self.save_screenshot_png(pngname)
+
 #### 気象 ####
     def screenshot_over_city_weather_kobetu(self,pngname:str="over_city_weather_kobetu.png"):
         '''
@@ -961,9 +1019,11 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_snow_kobetu()
-    kawabou.screenshot_over_city_snow_kobetu_target()
-    kawabou.screenshot_over_city_snow_keika()
+    kawabou.screenshot_over_city_kaigan_kobetu()
+    kawabou.screenshot_over_city_kaigan_2mon()
+    kawabou.screenshot_over_city_kaigan_kobetu_dt1()
+    kawabou.screenshot_over_city_kaigan_keika()
+    kawabou.screenshot_over_city_kaigan_genkyo()
 
 if __name__ == "__main__":
     main()
