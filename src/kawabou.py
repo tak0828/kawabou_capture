@@ -306,6 +306,18 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 #### ダム ####
+    # ダムグラフ(10分)スクリーンショット
+    def screenshot_over_city_dam_kobetu(self,ovsrvId="2152800700001",pngname:str="over_city_dam_kobetu.png"):
+        '''
+        ダムグラフ(10分)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
+
     # 時刻ダム情報スクリーンショット
     def screenshot_over_city_dam_info(self,pngname:str="over_city_dam_info.png"):
         '''
@@ -315,6 +327,78 @@ class Kawabou(SiteBase):
         '''
         self.login()
         self.__over_city_dam_info()
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報グラフ(対象観測所)スクリーンショット
+    def screenshot_over_city_dam_info_target(self,ovsrvId="0204900700006",pngname:str="over_city_dam_info_target.png"):
+        '''
+        時刻ダム情報グラフ(対象観測所)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_target(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報グラフ(10分)スクリーンショット
+    def screenshot_over_city_dam_info_target_dt10(self,ovsrvId="0025700700001",pngname:str="over_city_dam_info_target_dt10.png"):
+        '''
+        時刻ダム情報グラフ(10分)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_target_dt10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報詳細表スクリーンショット
+    def screenshot_over_city_dam_info_kobetu_dt10(self,ovsrvId="0025700700001",pngname:str="over_city_dam_info_kobetu_dt10.png"):
+        '''
+        時刻ダム情報詳細表スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_kobetu_dt10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報詳細表(対象観測所)スクリーンショット
+    def screenshot_over_city_dam_info_kobetu_target_dt10(self,ovsrvId="0025700700001",pngname:str="over_city_dam_info_kobetu_target_dt10.png"):
+        '''
+        時刻ダム情報詳細表(対象観測所)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_kobetu_target_dt10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報経過表スクリーンショット
+    def screenshot_over_city_dam_info_keika(self,areacode="81",pngname:str="over_city_dam_info_keika.png"):
+        '''
+        時刻ダム情報経過表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 時刻ダム情報詳細表(10分)スクリーンショット
+    def screenshot_over_city_dam_info_keika_dt10(self,areacode="81",pngname:str="over_city_dam_info_keika_dt10.png"):
+        '''
+        時刻ダム情報詳細表(10分)スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_info_keika_dt10(areacode)
         self.save_screenshot_png(pngname)
 
 #### 水質 ####
@@ -714,7 +798,7 @@ class Kawabou(SiteBase):
     def __over_city_dam_info_keika(self,areacode:str="81"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1102")
     # 時刻ダム情報詳細表(10分)
-    def __over_city_dam_info_keiak_dt10(self,areacode:str="81"):
+    def __over_city_dam_info_keika_dt10(self,areacode:str="81"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityDamKeika.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1102&fvrt=yes&timeType=10")
 
 #### 積雪関連 ####
@@ -854,8 +938,9 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_daysuisitu_kobetuDt1()
-    kawabou.screenshot_over_city_suisitu_keika_kobetu()
+    kawabou.screenshot_over_city_dam_info_kobetu_target_dt10()
+    kawabou.screenshot_over_city_dam_info_keika()
+    kawabou.screenshot_over_city_dam_info_keika_dt10()
 
 if __name__ == "__main__":
     main()
