@@ -96,6 +96,7 @@ class Kawabou(SiteBase):
         '''
         地方キャプチャ
 
+        :param str areaname : 地方名
         :param str pngname: ファイル名
         '''
         self.__area_gaikyo(areaname)
@@ -109,6 +110,7 @@ class Kawabou(SiteBase):
         '''
         雨量グラフ(10分)ページスクリーンショット
 
+        :param str areacode : 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
@@ -120,10 +122,23 @@ class Kawabou(SiteBase):
         '''
         時間雨量経過表ページスクリーンショット
 
+        :param str areacode : 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_rain_keika_1(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 時間雨量経過表(対象観測所1か所)ページスクリーンショット
+    def screenshot_over_city_rain_kobetu_1(self,ovsrvId="2152800100021",pngname:str="over_city_rain_kobetu_1.png"):
+        '''
+        時間雨量経過表(対象観測所1か所)ページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_rain_kobetu_1(ovsrvId)
         self.save_screenshot_png(pngname)
 
     # 雨量グラフ(対象観測所)スクリーンショット
@@ -148,6 +163,18 @@ class Kawabou(SiteBase):
         self.__over_city_rain_kobetuMLT()
         self.save_screenshot_png(pngname)
 
+    # レーダ雨量(現況)(Cバンド)ページスクリーンショット
+    def screenshot_over_city_radar_genkyo(self,areacode="80",pngname:str="over_city_radar_genkyo.png"):
+        '''
+        レーダ雨量(現況)(Cバンド)ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_radar_genkyo(areacode)
+        self.save_screenshot_png(pngname)
+
     # レーダ雨量(累加)(Cバンド)スクリーンショット
     def screenshot_over_city_radar_ruika(self,pngname:str="over_city_radar_ruika.png"):
         '''
@@ -158,6 +185,43 @@ class Kawabou(SiteBase):
         self.login()
         self.__over_city_radar_ruika()
         self.save_screenshot_png(pngname)
+
+    # レーダ雨量(現況)(XRAIN)ページスクリーンショット
+    def screenshot_over_city_radar_yosokuD(self,areacode="84",pngname:str="over_city_radar_yosokuD.png"):
+        '''
+        レーダ雨量(現況)(XRAIN)ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_radar_yosokuD(areacode)
+        self.save_screenshot_png(pngname)
+
+    # レーダ雨量(現況)(Cバンド)(気象庁)ページスクリーンショット
+    def screenshot_over_city_radar_genkyo_kisyou(self,areacode="84",pngname:str="over_city_radar_genkyo_kisyou.png"):
+        '''
+        レーダ雨量(現況)(Cバンド)(気象庁)ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_radar_genkyo_kisyou(areacode)
+        self.save_screenshot_png(pngname)
+
+    # レーダ雨量(履歴4分割)(Cバンド)(2枚)ページスクリーンショット
+    def screenshot_over_city_radar_rirekiB(self,areacode="84",pngname:str="over_city_radar_genkyo_rirekiB.png"):
+        '''
+        レーダ雨量(履歴4分割)(Cバンド)(2枚)ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_radar_rirekiB(areacode)
+        self.save_screenshot_png(pngname)
+
 #### 水位 ####
     # 時刻水位・流量グラフ(対象観測所)スクリーンショット
     def screenshot_over_city_timesuii_kobetu(self,pngname:str="over_city_timesuii_kobetu.png"):
@@ -415,7 +479,7 @@ class Kawabou(SiteBase):
     def __over_city_radar_genkyo_kisyou(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&areaCd={areacode}&gamenId=02-1801")
     # レーダ雨量(履歴4分割)(Cバンド)(2枚)
-    def __over_city_radar_rerekiB(self,areacode=84):
+    def __over_city_radar_rirekiB(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRirekiB.do?init=init&areaCd={areacode}&gamenId=02-1804")
 
     ### 一般向けの引数は適当に抽出、使用するときに調整必要
@@ -655,7 +719,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_rain_keika_1()
+    kawabou.screenshot_over_city_radar_rirekiB()
 
 if __name__ == "__main__":
     main()
