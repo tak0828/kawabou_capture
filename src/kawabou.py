@@ -329,15 +329,29 @@ class Kawabou(SiteBase):
         self.__over_city_timesuisitu_keika()
         self.save_screenshot_png(pngname)
     # 時刻水質グラフスクリーンショット
-    def screenshot_over_city_suisitu_kobetu(self,pngname:str="over_city_suisitu_kobetu.png"):
+    def screenshot_over_city_suisitu_kobetu(self,ovsrvId="2152800600001",pngname:str="over_city_suisitu_kobetu.png"):
         '''
         時刻水質グラフスクリーンショット
 
+        :param str ovsrvId : 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_suisitu_kobetu()
+        self.__over_city_suisitu_kobetu(ovsrvId)
         self.save_screenshot_png(pngname)
+    
+    # 時刻水質グラフ(対象観測所)ページスクリーンショット
+    def screenshot_over_city_suisitu_kobetu_1(self,ovsrvId="2152800600001",pngname:str="over_city_suisitu_kobetu_1.png"):
+        '''
+        時刻水質グラフ(対象観測所)ページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_suisitu_kobetu_1(ovsrvId)
+        self.save_screenshot_png(pngname)
+
     # 時刻水質詳細表スクリーンショット
     def screenshot_over_city_timesuisitu_kobetuDt1(self,pngname:str="over_city_timesuisitu_kobetuDt1.png"):
         '''
@@ -347,6 +361,67 @@ class Kawabou(SiteBase):
         '''
         self.login()
         self.__over_city_timesuisitu_kobetuDt1()
+        self.save_screenshot_png(pngname)
+    
+    # 水質経過表ページスクリーンショット
+    def screenshot_over_city_suisitu_keika(self,areacode="84",pngname:str="over_city_suisitu_keika.png"):
+        '''
+        水質経過表ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_suisitu_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 水質詳細表ページスクリーンショット
+    def screenshot_over_city_suisitu_keika_info(self,ovsrvId="2152800600001",pngname:str="over_city_suisitu_keika_info.png"):
+        '''
+        水質詳細表ページスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_suisitu_keika_info(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    # 時刻水質現況表ページスクリーンショット
+    def screenshot_over_city_suisitu_genkyou(self,areacode="84",pngname:str="over_city_suisitu_genkyou.png"):
+        '''
+        時刻水質現況表ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuisitu_genkyou(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 時刻水質経過表(対象観測所)ページスクリーンショット
+    def screenshot_over_city_suisitu_keika_kobetu(self,areacode="83",pngname:str="over_city_suisitu_keika_kobetu.png"):
+        '''
+        時刻水質経過表(対象観測所)ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuisitu_keika_kobetu(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 日水質詳細表ページスクリーンショット
+    def screenshot_over_city_daysuisitu_kobetuDt1(self,areacode="83",ovsrvId="2152800600001",pngname:str="over_city_daysuisitu_kobetuDt1.png"):
+        '''
+        日水質詳細表ページスクリーンショット
+
+        :param str areacode : 地方コード
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_daysuisitu_kobetuDt1(areacode,ovsrvId)
         self.save_screenshot_png(pngname)
 
 #### 排水機場 ####
@@ -583,7 +658,7 @@ class Kawabou(SiteBase):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKeikaDay.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1306")
 
     # 水質詳細表
-    def __over_city_suisitu_keika(self,areacode=84,obsrvId:str="2152800600001"):
+    def __over_city_suisitu_keika_info(self,areacode=84,obsrvId:str="2152800600001"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuisituKobetuDayDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1308")
 
     # 時刻水質グラフ
@@ -779,7 +854,8 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_timesuii_keika()
+    kawabou.screenshot_over_city_daysuisitu_kobetuDt1()
+    kawabou.screenshot_over_city_suisitu_keika_kobetu()
 
 if __name__ == "__main__":
     main()
