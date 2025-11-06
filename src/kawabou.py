@@ -103,7 +103,39 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 
+
 ### 基準値超過(over)
+
+#### 一般
+    def screenshot_common_uryou(self,zm:int=15,ofcCd:int=15617,obsCd:int=127,lat:float=44.737,lon:float=142.1183611,pngname:str="common_uryou.png"):
+        '''
+        一般向け川の防災情報(雨量グラフ)スクリーンショット
+
+        :param int zm: ズームレベル
+        :param int ofcCd: ???
+        :param int obsCd: ???
+        :param float lat: 緯度
+        :param float lon: 経度
+        :param str pngname: ファイル名
+        '''
+        self.__over_common_uryou(zm,ofcCd,obsCd,lat,lon)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_common_xrain(self,zm:int=15,ofcCd:int=15617,obsCd:int=127,lat:float=44.737,lon:float=142.1183611,pngname:str="common_xrain.png"):
+        '''
+        一般向け川の防災情報(XRAIN4分割)スクリーンショット
+
+        :param int zm: ズームレベル
+        :param int ofcCd: ???
+        :param int obsCd: ???
+        :param float lat: 緯度
+        :param float lon: 経度
+        :param str pngname: ファイル名
+        '''
+        self.__over_common_xrain(zm,ofcCd,obsCd,lat,lon)
+        self.save_screenshot_png(pngname)
+
+    
 
     # 雨量グラフ(10分)ページスクリーンショット
     def screenshot_over_city_rain_keika(self,areacode="84",pngname:str="over_city_rain_keika.png"):
@@ -1164,8 +1196,8 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_weir_kobetu()
-    kawabou.screenshot_over_city_weir_kobetu_dt10()
+    kawabou.screenshot_common_uryou()
+    kawabou.screenshot_common_xrain()
 
 if __name__ == "__main__":
     main()
