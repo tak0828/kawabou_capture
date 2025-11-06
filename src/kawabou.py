@@ -86,6 +86,8 @@ class Kawabou(SiteBase):
     def screenshot_pref_gaikyo(self,prefname:str="和歌山県",pngname:str="pref_gaikyou.png"):
         '''
         都道府県キャプチャ
+
+        :param str pngname: ファイル名
         '''
         self.__pref_gaikyo(prefname)
         self.save_screenshot_png(pngname)
@@ -93,6 +95,8 @@ class Kawabou(SiteBase):
     def screenshot_area_gaikyo(self,areaname:str="全国",pngname:str="area_gaikyou.png"):
         '''
         地方キャプチャ
+
+        :param str pngname: ファイル名
         '''
         self.__area_gaikyo(areaname)
         self.save_screenshot_png(pngname)
@@ -100,20 +104,57 @@ class Kawabou(SiteBase):
 
 ### 基準値超過(over)
 
+    # 雨量グラフ(10分)ページスクリーンショット
+    def screenshot_over_city_rain_keika(self,areacode="84",pngname:str="over_city_rain_keika.png"):
+        '''
+        雨量グラフ(10分)ページスクリーンショット
+
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_rain_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    # 時間雨量経過表ページスクリーンショット
+    def screenshot_over_city_rain_keika_1(self,areacode="84",pngname:str="over_city_rain_keika_1.png"):
+        '''
+        時間雨量経過表ページスクリーンショット
+
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_rain_keika_1(areacode)
+        self.save_screenshot_png(pngname)
+
     # 雨量グラフ(対象観測所)スクリーンショット
     def screenshot_over_city_rain_kobetu(self,pngname:str="over_city_rain_kobetu.png"):
+        '''
+        雨量グラフ(対象観測所)スクリーンショット
+
+        :param str pngname: ファイル名
+        '''
         self.login()
         self.__over_city_rain_kobetu()
         self.save_screenshot_png(pngname)
 
     # 雨量グラフ(比較3か所)スクリーンショット
     def screenshot_over_city_rain_kobetuMLT(self,pngname:str="over_city_rain_kobetuMLT.png"):
+        '''
+        雨量グラフ(比較3か所)スクリーンショット
+
+        :param str pngname: ファイル名
+        '''
         self.login()
         self.__over_city_rain_kobetuMLT()
         self.save_screenshot_png(pngname)
 
     # レーダ雨量(累加)(Cバンド)スクリーンショット
     def screenshot_over_city_radar_ruika(self,pngname:str="over_city_radar_ruika.png"):
+        '''
+        レーダ雨量(累加)(Cバンド)スクリーンショット
+
+        :param str pngname: ファイル名
+        '''
         self.login()
         self.__over_city_radar_ruika()
         self.save_screenshot_png(pngname)
@@ -122,6 +163,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_timesuii_kobetu(self,pngname:str="over_city_timesuii_kobetu.png"):
         '''
         時刻水位・流量グラフ(対象観測所)スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_timesuii_kobetu()
@@ -131,6 +174,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_timesuii_kobetuMLT(self,pngname:str="over_city_timesuii_kobetuMLT.png"):
         '''
         時刻水位・流量グラフ(比較観測所1か所)
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_timesuii_kobetuMLT()
@@ -141,6 +186,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_dam_info(self,pngname:str="over_city_dam_info.png"):
         '''
         時刻ダム情報スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_dam_info()
@@ -151,6 +198,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_timesuisitu_keika(self,pngname:str="over_city_timesuisitu_keika.png"):
         '''
         時刻水質経過表スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_timesuisitu_keika()
@@ -159,6 +208,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_suisitu_kobetu(self,pngname:str="over_city_suisitu_kobetu.png"):
         '''
         時刻水質グラフスクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_suisitu_kobetu()
@@ -167,6 +218,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_timesuisitu_kobetuDt1(self,pngname:str="over_city_timesuisitu_kobetuDt1.png"):
         '''
         時刻水質詳細表スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_timesuisitu_kobetuDt1()
@@ -176,6 +229,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_haisui_kobetu_target(self,pngname:str="over_city_haisui_kobetu_target.png"):
         '''
         時刻排水ポンプ場情報グラフ(対象観測所)スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_haisui_kobetu_target()
@@ -185,6 +240,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_snow_kobetu_target(self,pngname:str="over_city_snow_kobetu_target.png"):
         '''
         時刻積雪深グラフ(対象観測所)スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_snow_kobetu_target()
@@ -194,6 +251,8 @@ class Kawabou(SiteBase):
     def screenshot_over_city_weather_kobetu(self,pngname:str="over_city_weather_kobetu.png"):
         '''
         時刻気象詳細表スクリーンショット
+
+        :param str pngname: ファイル名
         '''
         self.login()
         self.__over_city_weather_kobetu()
@@ -596,7 +655,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_area_gaikyo("中国")
+    kawabou.screenshot_over_city_rain_keika_1()
 
 if __name__ == "__main__":
     main()
