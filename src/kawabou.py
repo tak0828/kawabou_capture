@@ -520,14 +520,37 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 #### 積雪深 ####
-    def screenshot_over_city_snow_kobetu_target(self,pngname:str="over_city_snow_kobetu_target.png"):
+    def screenshot_over_city_snow_kobetu(self,ovsrvId="2075700300016",pngname:str="over_city_snow_kobetu.png"):
         '''
-        時刻積雪深グラフ(対象観測所)スクリーンショット
+        時刻積雪深グラフスクリーンショット
 
+        :param str ovsrvId : 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_snow_kobetu_target()
+        self.__over_city_snow_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_snow_kobetu_target(self,ovsrvId="2075700300016",pngname:str="over_city_snow_kobetu_target.png"):
+        '''
+        時刻積雪深グラフ(対象観測所)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_snow_kobetu_target(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_snow_keika(self,areacode="81",pngname:str="over_city_snow_keika.png"):
+        '''
+        時刻積雪深経過表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_snow_keika(areacode)
         self.save_screenshot_png(pngname)
 
 #### 気象 ####
@@ -938,9 +961,9 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_dam_info_kobetu_target_dt10()
-    kawabou.screenshot_over_city_dam_info_keika()
-    kawabou.screenshot_over_city_dam_info_keika_dt10()
+    kawabou.screenshot_over_city_snow_kobetu()
+    kawabou.screenshot_over_city_snow_kobetu_target()
+    kawabou.screenshot_over_city_snow_keika()
 
 if __name__ == "__main__":
     main()
