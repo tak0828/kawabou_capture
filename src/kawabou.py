@@ -613,18 +613,6 @@ class Kawabou(SiteBase):
         self.__over_city_kaigan_kobetu(ovsrvId)
         self.save_screenshot_png(pngname)
 
-    def screenshot_over_city_kaigan_2mon(self,areacode="90",ovsrvId="1622001200001",pngname:str="over_city_kaigan_2mon.png"):
-        '''
-        海岸2か月データスクリーンショット
-
-        :param str areacode: 地方コード
-        :param str ovsrvId: 観測所コード
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_kaigan_2mon(areacode,ovsrvId)
-        self.save_screenshot_png(pngname)
-
     def screenshot_over_city_kaigan_kobetu_dt1(self,areacode="81",ovsrvId="2081701200001",pngname:str="over_city_kaigan_kobetu_dt1.png"):
         '''
         海岸詳細表スクリーンショット
@@ -970,9 +958,6 @@ class Kawabou(SiteBase):
     # 時刻海岸情報経過表
     def __over_city_kaigan_keika(self,areacode:str="81"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKeika.do?init=init&areaCd={areacode}&gamenId=02-1202")
-    # 海岸2か月データ
-    def __over_city_kaigan_2mon(self,areacode:str="90",obsrvId:str="1622001200001"):
-        self.get_page(f"https://city.river.go.jp/kawabou/dataOutPre.do?gamenId=02-2001&gamenIdPrnt=02-1203&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&timeType=60&timeType2=10&yokeiObsrvs=&kanriKubuns=&dispDataTypes=&foreStgKind=usual&dispTeles=&basinDataType=&dispShogens=&dispRuika=")
     # 海岸詳細表
     def __over_city_kaigan_kobetu_dt1(self,areacode:str="81",obsrvId:str="2081701200001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1204")
