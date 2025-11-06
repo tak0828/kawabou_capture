@@ -74,7 +74,8 @@ class Tokyo(CityBase):
 
 def main():
     tokyo = Tokyo()
-    tokyo.debug()
+    # tokyo.debug()
+    tokyo.visual_dam()
 
 if __name__ == "__main__":
     main()

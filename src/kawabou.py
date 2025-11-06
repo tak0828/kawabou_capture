@@ -622,6 +622,27 @@ class Kawabou(SiteBase):
         self.__over_city_weather_kobetu()
         self.save_screenshot_png(pngname)
     
+    def screenshot_over_city_weather_genkyo(self,areacode="84",pngname:str="over_city_weather_genkyo.png"):
+        '''
+        気象現況表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_weather_genkyo(areacode)
+        self.save_screenshot_png(pngname)
+        
+    def screenshot_over_city_weather_kobetu_target_yes(self,ovsrvId="2154601300001",pngname:str="over_city_weather_kobetu_target_yes.png"):
+        '''
+        気象詳細表(前日)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_weather_kobetu_target_yes(ovsrvId)
+        self.save_screenshot_png(pngname)
 
 
 ### 欠測・未受信(miss)
@@ -933,7 +954,7 @@ class Kawabou(SiteBase):
     def __over_city_weather_kobetu(self,obsrvId:str="2154601300001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1702&timeType=60&requestType=1")
     # 気象詳細表(前日)
-    def __over_city_haisui_kobetu_target_yes(self,obsrvId:str="2154601300001"):
+    def __over_city_weather_kobetu_target_yes(self,obsrvId:str="2154601300001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?obsrvId={obsrvId}&gamenId=02-1702&fvrt=yes")
     # # 気象詳細表(天気図)不明のためコメント
     # def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
@@ -1019,11 +1040,8 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_kaigan_kobetu()
-    kawabou.screenshot_over_city_kaigan_2mon()
-    kawabou.screenshot_over_city_kaigan_kobetu_dt1()
-    kawabou.screenshot_over_city_kaigan_keika()
-    kawabou.screenshot_over_city_kaigan_genkyo()
+    kawabou.screenshot_over_city_weather_genkyo()
+    kawabou.screenshot_over_city_weather_kobetu_target_yes()
 
 if __name__ == "__main__":
     main()
