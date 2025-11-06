@@ -519,6 +519,53 @@ class Kawabou(SiteBase):
         self.__over_city_haisui_kobetu_target()
         self.save_screenshot_png(pngname)
 
+    def screenshot_over_city_haisui_kobetu(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu.png"):
+        '''
+        時刻排水ポンプ場情報グラフスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_haisui_kobetu(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_haisui_kobetu_dt1(self,areacode="81",ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_dt1.png"):
+        '''
+        時刻排水ポンプ場情報グラフ詳細表スクリーンショット
+
+        :param str areacode : 地方コード
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_haisui_kobetu_dt1(areacode,ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    
+#### 堰 ####
+    def screenshot_over_city_weir_kobetu(self,areacode="83",ovsrvId="2127000800004",pngname:str="over_city_weir_kobetu.png"):
+        '''
+        堰グラフグラフスクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_weir_kobetu(areacode,ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_weir_kobetu_dt10(self,ovsrvId="2127000800004",pngname:str="over_city_weir_kobetu_dt10.png"):
+        '''
+        堰グラフ(10分)スクリーンショット
+
+        :param str ovsrvId : 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_weir_kobetu_dt10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
 #### 積雪深 ####
     def screenshot_over_city_snow_kobetu(self,ovsrvId="2075700300016",pngname:str="over_city_snow_kobetu.png"):
         '''
@@ -1040,8 +1087,8 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_weather_genkyo()
-    kawabou.screenshot_over_city_weather_kobetu_target_yes()
+    kawabou.screenshot_over_city_weir_kobetu()
+    kawabou.screenshot_over_city_weir_kobetu_dt10()
 
 if __name__ == "__main__":
     main()
