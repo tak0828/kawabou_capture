@@ -205,14 +205,15 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
     # レーダ雨量(累加)(Cバンド)スクリーンショット
-    def screenshot_over_city_radar_ruika(self,pngname:str="over_city_radar_ruika.png"):
+    def screenshot_over_city_radar_ruika(self,areacode:str="84",pngname:str="over_city_radar_ruika.png"):
         '''
         レーダ雨量(累加)(Cバンド)スクリーンショット
 
+        :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_radar_ruika()
+        self.__over_city_radar_ruika(areacode: str = "84")
         self.save_screenshot_png(pngname)
 
     # レーダ雨量(現況)(XRAIN)ページスクリーンショット
