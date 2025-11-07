@@ -555,7 +555,7 @@ class Kawabou(SiteBase):
         self.__over_city_weir_kobetu(areacode,ovsrvId)
         self.save_screenshot_png(pngname)
 
-    def screenshot_over_city_weir_kobetu_dt10(self,ovsrvId="2127000800004",pngname:str="over_city_weir_kobetu_dt10.png"):
+    def screenshot_over_city_weir_kobetu_t10(self,ovsrvId="2127000800004",pngname:str="over_city_weir_kobetu_t10.png"):
         '''
         堰グラフ(10分)スクリーンショット
 
@@ -563,7 +563,7 @@ class Kawabou(SiteBase):
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_weir_kobetu_dt10(ovsrvId)
+        self.__over_city_weir_kobetu_t10(ovsrvId)
         self.save_screenshot_png(pngname)
 
 #### 積雪深 ####
@@ -1045,7 +1045,7 @@ class Kawabou(SiteBase):
     # 気象詳細表(前日)
     def __over_city_weather_kobetu_target_yes(self,obsrvId:str="2154601300001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?obsrvId={obsrvId}&gamenId=02-1702&fvrt=yes")
-    # # 気象詳細表(天気図)不明のためコメント
+    # # 気象庁(天気図)不明のためコメント
     # def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
     #     self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
 
@@ -1054,8 +1054,8 @@ class Kawabou(SiteBase):
     def __over_city_weir_kobetu(self,areacode:str="83",obsrvId:str="2127000800004"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1402")
     # 堰グラフ(10分)
-    def __over_city_weir_kobetu_dt10(self,obsrvId:str="2127000800004"):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?obsrvId={obsrvId}&gamenId=02-1402&fvrt=yes&timeType=10")
+    def __over_city_weir_kobetu_t10(self,obsrvId:str="2127000800004"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityWeirKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1402&timeType=10&requestType=1")
 
 ### 欠測・未受信(miss)
     
@@ -1131,7 +1131,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_haisui_kobetu_all()
+    kawabou.screenshot_over_city_weir_kobetu_t10()
 
 if __name__ == "__main__":
     main()
