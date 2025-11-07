@@ -493,26 +493,42 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 #### 排水機場 ####
-    def screenshot_over_city_haisui_kobetu_target(self,pngname:str="over_city_haisui_kobetu_target.png"):
+    def screenshot_over_city_haisui_kobetu_t60(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_t60.png"):
         '''
+        時刻排水ポンプ場情報グラフ(正時)スクリーンショット
+
         時刻排水ポンプ場情報グラフ(対象観測所)スクリーンショット
-
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_haisui_kobetu_target()
-        self.save_screenshot_png(pngname)
-
-    def screenshot_over_city_haisui_kobetu(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu.png"):
-        '''
-        時刻排水ポンプ場情報グラフスクリーンショット
 
         :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_haisui_kobetu(ovsrvId)
+        self.__over_city_haisui_kobetu_t60(ovsrvId)
         self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_haisui_kobetu_t10(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_t10.png"):
+        '''
+        時刻排水ポンプ場情報グラフ(10分)スクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_haisui_kobetu_t10(ovsrvId)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_haisui_kobetu_all(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_all.png"):
+        '''
+        時刻排水ポンプ場情報グラフ(10分・正時)(2枚)スクリーンショット
+
+        :param str ovsrvId: 観測所コード
+        :param str pngname: ファイル名
+        '''
+
+        filename = f"{ovsrvId}-t10-{pngname}"
+        self.screenshot_over_city_haisui_kobetu_t10(ovsrvId,filename)
+        filename = f"{ovsrvId}-t60-{pngname}"
+        self.screenshot_over_city_haisui_kobetu_t60(ovsrvId,filename)
 
     def screenshot_over_city_haisui_kobetu_dt1(self,areacode="81",ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_dt1.png"):
         '''
@@ -1009,15 +1025,12 @@ class Kawabou(SiteBase):
         self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganGenkyou.do?init=init&areaCd={areacode}&gamenId=02-1201")
 
 #### 排水関連 ####
-    # 時刻排水ポンプ場情報グラフ
-    def __over_city_haisui_kobetu(self,obsrvId:str="2329700900001"):
+    # 時刻排水ポンプ場情報グラフ(正時)
+    def __over_city_haisui_kobetu_t60(self,obsrvId:str="2329700900001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=60&requestType=1")
-    # # 時刻排水ポンプ場情報グラフ(2枚)　はてなとなっている
-    # def __over_city_haisui_keika(self,areacode:str="81"):
-    #     self.get_page(f"https://city.river.go.jp/kawabou/cityKaiganKeika.do?init=init&areaCd={areacode}&gamenId=02-1202")
-    # 時刻排水ポンプ場情報グラフ(対象観測所)
-    def __over_city_haisui_kobetu_target(self,obsrvId:str="2127300900001"):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=60&requestType=1")
+    # 時刻排水ポンプ場情報グラフ(10分)
+    def __over_city_haisui_kobetu_t10(self,obsrvId:str="2329700900001"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1502&timeType=10&requestType=1")
     # 時刻排水ポンプ場情報グラフ詳細表
     def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
@@ -1118,7 +1131,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_snow_kobetu()
+    kawabou.screenshot_over_city_haisui_kobetu_all()
 
 if __name__ == "__main__":
     main()
