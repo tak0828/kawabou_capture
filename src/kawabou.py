@@ -79,6 +79,28 @@ class Kawabou(SiteBase):
         link.click()
 
 ############################################################################################
+####            ページ内時刻選択処理部分                                                ######
+############################################################################################
+
+    def __choise_common(self):
+        '''
+        各種時刻選択の共通部分
+        
+        ※まだ途中
+
+        '''
+        cst_dam = "cityDamKeika"
+        cst_haisui = "cityHaisuiKobetu"
+        # yyyy年M月
+        # Select(self.driver.find_element(By.XPATH, '//*[@id="cityHaisuiKobetu_commonForm_yearMonthString"]')).select_by_value("00")
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_hourString"]')).select_by_value("00")
+        # 正時の時は何時でもいいはず
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_minuteString"]')).select_by_value("10")
+        # 
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_dayString"]')).select_by_value("05")
+        self.driver.find_element(By.NAME, "Img10pun").click()
+
+############################################################################################
 ####            スクリーンショット　処理群                                              ######
 ############################################################################################
 
@@ -1200,7 +1222,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_seki_haisui_snow_gaikyo()
+    kawabou.screenshot_over_city_haisui_kobetu_t60()
 
 if __name__ == "__main__":
     main()
