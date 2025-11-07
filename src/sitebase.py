@@ -61,6 +61,10 @@ class SiteBase:
     # ドライバーを止める
     def shutdown(self):
         self.driver.stop()
+
+    # 画面サイズ変更ラッパー
+    def set_window_size(self,window_width,window_height):
+        self.__driver.set_window_size(window_width,window_height)
         
     ###### プロパティ ######
     @property
