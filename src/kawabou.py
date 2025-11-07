@@ -276,20 +276,8 @@ class Kawabou(SiteBase):
         self.__over_city_suii_kobetu_dt10(ovsrvId)
         self.save_screenshot_png(pngname)
 
-    # 時刻水位・流量グラフページスクリーンショット
-    def screenshot_over_city_timesuii(self,ovsrvId="0153700400092",pngname:str="over_city_timesuii.png"):
-        '''
-        時刻水位・流量グラフページスクリーンショット
-
-        :param str ovsrvId: 観測所コード
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_timesuii(ovsrvId)
-        self.save_screenshot_png(pngname)
-
     # 時刻水位・流量現況表ページスクリーンショット
-    def screenshot_over_city_timesuii_genkyou(self,areacode="84",pngname:str="over_city_timesuii_genkyou.png"):
+    def screenshot_over_city_timesuii_genkyou(self,areacode:str="84",pngname:str="over_city_timesuii_genkyou.png"):
         '''
         時刻水位・流量現況表ページスクリーンショット
 
@@ -301,7 +289,7 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
     # 時刻水位・流量経過表ページスクリーンショット
-    def screenshot_over_city_timesuii_keika(self,areacode="84",pngname:str="over_city_timesuii_keika.png"):
+    def screenshot_over_city_timesuii_keika(self,areacode:str="84",pngname:str="over_city_timesuii_keika.png"):
         '''
         時刻水位・流量経過表ページスクリーンショット
 
@@ -312,27 +300,33 @@ class Kawabou(SiteBase):
         self.__over_city_timesuii_keika(areacode)
         self.save_screenshot_png(pngname)
 
-    # 時刻水位・流量グラフ(対象観測所)スクリーンショット
-    def screenshot_over_city_timesuii_kobetu(self,pngname:str="over_city_timesuii_kobetu.png"):
+    def screenshot_over_city_timesuii_kobetu(self,ovsrvId="0153700400092",pngname:str="over_city_timesuii_kobetu.png"):
         '''
+        時刻水位・流量グラフページスクリーンショット
+
         時刻水位・流量グラフ(対象観測所)スクリーンショット
 
+        :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_timesuii_kobetu()
+        self.__over_city_timesuii_kobetu(ovsrvId)
         self.save_screenshot_png(pngname)
 
-    # 時刻水位・流量グラフ(比較観測所1か所)
-    def screenshot_over_city_timesuii_kobetuMLT(self,pngname:str="over_city_timesuii_kobetuMLT.png"):
+    def screenshot_over_city_timesuii_kobetuMLT(self,areacode:list[str]=["84"],pngname:str="over_city_timesuii_kobetuMLT.png"):
         '''
-        時刻水位・流量グラフ(比較観測所1か所)
+        時刻水位・流量グラフ(比較観測所1・2+nか所)
 
+        時刻水位・流量グラフ(近隣観測所1か所+n)
+
+
+        :param list[str] areacode: 地方コード
         :param str pngname: ファイル名
         '''
-        self.login()
-        self.__over_city_timesuii_kobetuMLT()
-        self.save_screenshot_png(pngname)
+        for code in areacode:
+            self.login()
+            self.__over_city_timesuii_kobetuMLT(code)
+            self.save_screenshot_png(pngname)
 
 #### ダム ####
     # ダムグラフ(10分)スクリーンショット
@@ -963,30 +957,26 @@ class Kawabou(SiteBase):
         self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm={zm}&clat={lat}&clon={lon}&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=4&rdopa=50&rdint=5")
     
 #### 水位関連 ####
-    # 水位グラフ
+    # 水位グラフ(60分)
     def __over_city_suii_kobetu_dt60(self,obsrvId:str="0153700400092"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=60")
     # 水位グラフ(10分)
     def __over_city_suii_kobetu_dt10(self,obsrvId:str="0153700400092"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes&timeType=10")
 
-    # 時刻水位・流量グラフ
-    def __over_city_timesuii(self,obsrvId:str="0153700400092"):
-        self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes")
     # 時刻水位・流量グラフ(対象観測所)
-    # 上記と同一URL
     def __over_city_timesuii_kobetu(self,obsrvId:str="0153700400092"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetu.do?obsrvId={obsrvId}&gamenId=02-1006&stgGrpKind=survFore&fvrt=yes")
 
     # 時刻水位・流量グラフ(比較観測所)
-    def __over_city_timesuii_kobetuMLT(self,areacode=84):
+    def __over_city_timesuii_kobetuMLT(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKobetuMlt.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1004&stgGrpKind=survFore&fvrt=yes")
 
     # 時刻水位・流量現況表
-    def __over_city_timesuii_genkyou(self,areacode=84):
+    def __over_city_timesuii_genkyou(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiGenkyou.do?prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1001&fvrt=yes")
     # 時刻水位・流量経過表
-    def __over_city_timesuii_keika(self,areacode=84):
+    def __over_city_timesuii_keika(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySuiiKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-1002")
 
 #### 水質関連 ####
