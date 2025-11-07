@@ -92,6 +92,16 @@ class Kawabou(SiteBase):
         self.__pref_gaikyo(prefname)
         self.save_screenshot_png(pngname)
 
+    def screenshot_zenkoku_gaikyo(self,pngname:str="area_gaikyou.png"):
+        '''
+        全国概況図キャプチャ
+
+        :param str areaname: 地方名
+        :param str pngname: ファイル名
+        '''
+        self.__area_gaikyo("全国")
+        self.save_screenshot_png(pngname)
+
     def screenshot_area_gaikyo(self,areaname:str="全国",pngname:str="area_gaikyou.png"):
         '''
         地方キャプチャ
@@ -100,6 +110,16 @@ class Kawabou(SiteBase):
         :param str pngname: ファイル名
         '''
         self.__area_gaikyo(areaname)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_seki_haisui_snow_gaikyo(self,areacode:str="83",pngname:str="seki_haisui_snow_gaikyou.png"):
+        '''
+        地方キャプチャ
+
+        :param str areacode: 地方コード
+        :param str pngname: ファイル名
+        '''
+        self.__seki_haisui_snow_gaikyo(areacode)
         self.save_screenshot_png(pngname)
 
 
@@ -131,6 +151,30 @@ class Kawabou(SiteBase):
         :param str pngname: ファイル名
         '''
         self.__over_common_xrain(zm,lat,lon)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_common_cctv(self,zm:int=15,lat:float=35.58876574589178,lon:float=139.67146396636966,pngname:str="common_cctv.png"):
+        '''
+        一般向け川の防災情報(CCTVカメラ)(一般向け)スクリーンショット
+
+        :param int zm: ズームレベル
+        :param float lat: 緯度
+        :param float lon: 経度
+        :param str pngname: ファイル名
+        '''
+        self.__over_common_cctv(zm,lat,lon)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_common_radar(self,zm:int=15,lat:float=44.25678792927685,lon:float=142.3669767379761,pngname:str="common_radar.png"):
+        '''
+         一般向け川の防災情報(レーダ画像)スクリーンショット
+
+        :param int zm: ズームレベル
+        :param float lat: 緯度
+        :param float lon: 経度
+        :param str pngname: ファイル名
+        '''
+        self.__over_common_radar(zm,lat,lon)
         self.save_screenshot_png(pngname)
 
     
@@ -674,6 +718,17 @@ class Kawabou(SiteBase):
         self.__over_city_weather_kobetu_target_yes(ovsrvId)
         self.save_screenshot_png(pngname)
 
+    def screenshot_over_bousai_weather(self,pngname:str="over_bousai_weather.png"):
+        '''
+        気象庁(天気図)
+        異なるサイトであること。サイト内操作が必要な場合は別のクラスとすること
+
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_bousai_weather()
+        self.save_screenshot_png(pngname)
+
 
 ### 欠測・未受信(miss)
 
@@ -886,6 +941,14 @@ class Kawabou(SiteBase):
         self.get_page(f"https://city.river.go.jp/kawabou/cityTopGaikyoMap.do")
         self.__choise_area(CONST.AREA_CODE[areaname])
 
+    def __seki_haisui_snow_gaikyo(self,areacode:str="83"):
+        '''
+        堰・排水ポンプ・積雪等概況図
+
+        :param str areacode: 地方コード
+        '''
+        self.get_page(f"https://city.river.go.jp/kawabou/cityOtherGaikyoMap.do?init=init&areaCd={areacode}&gamenId=02-0202")
+
 ### 基準値超過(over) ###
 
 #### 雨量関連 ####
@@ -926,6 +989,12 @@ class Kawabou(SiteBase):
     # 一般向け川の防災情報(XRAIN4分割)
     def __over_common_xrain(self,zm=15,lat:float=44.737,lon:float=142.1183611):
         self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm={zm}&clat={lat}&clon={lon}&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=4&rdopa=50&rdint=5")
+    # 一般向け川の防災情報(CCTVカメラ)(一般向け)
+    def __over_common_cctv(self,zm=15,lat:float=35.58876574589178,lon:float=139.67146396636966):
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/tm?zm={zm}&clat={lat}&clon={lon}&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&itmkndCd=100&scamId=221320032&ownCd=21320&sysCamId=21320007")
+    # 一般向け川の防災情報(レーダ画像)
+    def __over_common_radar(self,zm=15,lat:float=44.25678792927685,lon:float=142.3669767379761):
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm={zm}&clat={lat}&clon={lon}&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=1&rdopa=50")
     
 #### 水位関連 ####
     # 水位グラフ(60分)
@@ -1045,9 +1114,9 @@ class Kawabou(SiteBase):
     # 気象詳細表(前日)
     def __over_city_weather_kobetu_target_yes(self,obsrvId:str="2154601300001"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityWeatherKobetu.do?obsrvId={obsrvId}&gamenId=02-1702&fvrt=yes")
-    # # 気象庁(天気図)不明のためコメント
-    # def __over_city_haisui_kobetu_dt1(self,areacode:str="81",obsrvId:str="2329700900001"):
-    #     self.get_page(f"https://city.river.go.jp/kawabou/cityHaisuiKobetuDtl.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&obsrvId={obsrvId}&gamenId=02-1503")
+    # 気象庁(天気図)※サイト違いであることを考慮すること
+    def __over_bousai_weather(self):
+        self.get_page(f"https://www.jma.go.jp/bosai/weather_map/")
 
 #### 堰関連 ####
     # 堰グラフ
@@ -1131,7 +1200,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_weir_kobetu_t10()
+    kawabou.screenshot_seki_haisui_snow_gaikyo()
 
 if __name__ == "__main__":
     main()
