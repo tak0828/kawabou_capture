@@ -5,7 +5,7 @@ class Tokyo(CityBase):
         super().__init__(prefname="東京都",areaname="関東",ovsId=ovsId,user=user,pwd=pwd)
 
     def idw_caution(self):
-        self.kawabou.screenshot_over_city_rain_kobetu()
+        self.kawabou.screenshot_over_city_rain_kobetu_t10()
         self.kawabou.screenshot_over_city_rain_kobetuMLT()
         self.kawabou.screenshot_over_city_radar_ruika()
         self.kawabou.screenshot_pref_gaikyo(self.prefname)

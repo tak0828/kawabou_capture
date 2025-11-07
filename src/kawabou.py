@@ -121,26 +121,59 @@ class Kawabou(SiteBase):
         self.__over_common_uryou(zm,ofcCd,obsCd,lat,lon)
         self.save_screenshot_png(pngname)
 
-    def screenshot_common_xrain(self,zm:int=15,ofcCd:int=15617,obsCd:int=127,lat:float=44.737,lon:float=142.1183611,pngname:str="common_xrain.png"):
+    def screenshot_common_xrain(self,zm:int=15,lat:float=44.737,lon:float=142.1183611,pngname:str="common_xrain.png"):
         '''
         一般向け川の防災情報(XRAIN4分割)スクリーンショット
 
         :param int zm: ズームレベル
-        :param int ofcCd: ???
-        :param int obsCd: ???
         :param float lat: 緯度
         :param float lon: 経度
         :param str pngname: ファイル名
         '''
-        self.__over_common_xrain(zm,ofcCd,obsCd,lat,lon)
+        self.__over_common_xrain(zm,lat,lon)
         self.save_screenshot_png(pngname)
 
     
-
-    # 雨量グラフ(10分)ページスクリーンショット
-    def screenshot_over_city_rain_keika(self,areacode="84",pngname:str="over_city_rain_keika.png"):
+#### 雨量 ####
+    def screenshot_over_city_rain_kobetu_t10(self,obsrvId:list[str]=["2132000100024"],pngname:str="over_city_rain_kobetu_t10.png"):
         '''
         雨量グラフ(10分)ページスクリーンショット
+
+        雨量グラフ10分(比較観測所1か所)
+
+        :param str obsrvId: 近傍観測所コード
+        :param str pngname: ファイル名
+        '''
+        for id in obsrvId:
+            self.login()
+            self.__over_city_rain_kobetu_t10(id)
+            filename = f"{id}-{pngname}"
+            self.save_screenshot_png(filename)
+
+    def screenshot_over_city_rain_kobetu_t60(self,obsrvId:list[str]=["0332900100039"],pngname:str="over_city_rain_kobetu_t60.png"):
+        '''
+        雨量グラフ(対象観測所)スクリーンショット
+
+        雨量グラフ(比較観測所n+1か所)スクリーンショット
+
+        雨量グラフ(近隣観測所n+1か所)スクリーンショット
+
+        時間雨量グラフ(対象観測所1か所)
+
+        近隣雨量グラフ(2か所)
+
+        :param List[str] obsrvId: 近傍観測所コード
+        :param str pngname: ファイル名
+        '''
+        for id in obsrvId:
+            self.login()
+            self.__over_city_rain_kobetu_t60(id)
+            filename = f"{id}-{pngname}"
+            self.save_screenshot_png(filename)
+
+    def screenshot_over_city_rain_keika(self,areacode="84",pngname:str="over_city_rain_keika.png"):
+        '''
+        時間雨量経過表ページスクリーンショット
 
         :param str areacode: 地方コード
         :param str pngname: ファイル名
@@ -149,54 +182,18 @@ class Kawabou(SiteBase):
         self.__over_city_rain_keika(areacode)
         self.save_screenshot_png(pngname)
 
-    # 時間雨量経過表ページスクリーンショット
-    def screenshot_over_city_rain_keika_1(self,areacode="84",pngname:str="over_city_rain_keika_1.png"):
+    def screenshot_over_city_rain_kobetuMLT(self,areacode:str="84",pngname:str="over_city_rain_kobetuMLT.png"):
         '''
-        時間雨量経過表ページスクリーンショット
+        時間雨量経過表(比較観測所3か所)スクリーンショット
 
         :param str areacode: 地方コード
         :param str pngname: ファイル名
         '''
         self.login()
-        self.__over_city_rain_keika_1(areacode)
+        self.__over_city_rain_kobetuMLT(areacode)
         self.save_screenshot_png(pngname)
 
-    # 時間雨量経過表(対象観測所1か所)ページスクリーンショット
-    def screenshot_over_city_rain_kobetu_1(self,ovsrvId="2152800100021",pngname:str="over_city_rain_kobetu_1.png"):
-        '''
-        時間雨量経過表(対象観測所1か所)ページスクリーンショット
-
-        :param str ovsrvId: 観測所コード
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_rain_kobetu_1(ovsrvId)
-        self.save_screenshot_png(pngname)
-
-    # 雨量グラフ(対象観測所)スクリーンショット
-    def screenshot_over_city_rain_kobetu(self,pngname:str="over_city_rain_kobetu.png"):
-        '''
-        雨量グラフ(対象観測所)スクリーンショット
-
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_rain_kobetu()
-        self.save_screenshot_png(pngname)
-
-    # 雨量グラフ(比較3か所)スクリーンショット
-    def screenshot_over_city_rain_kobetuMLT(self,pngname:str="over_city_rain_kobetuMLT.png"):
-        '''
-        雨量グラフ(比較3か所)スクリーンショット
-
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_rain_kobetuMLT()
-        self.save_screenshot_png(pngname)
-
-    # レーダ雨量(現況)(Cバンド)ページスクリーンショット
-    def screenshot_over_city_radar_genkyo(self,areacode="80",pngname:str="over_city_radar_genkyo.png"):
+    def screenshot_over_city_radar_genkyo(self,areacode:str="80",pngname:str="over_city_radar_genkyo.png"):
         '''
         レーダ雨量(現況)(Cバンド)ページスクリーンショット
 
@@ -243,7 +240,7 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
     # レーダ雨量(履歴4分割)(Cバンド)(2枚)ページスクリーンショット
-    def screenshot_over_city_radar_rirekiB(self,areacode="84",pngname:str="over_city_radar_genkyo_rirekiB.png"):
+    def screenshot_over_city_radar_rirekiB(self,areacode:str="84",pngname:str="over_city_radar_genkyo_rirekiB.png"):
         '''
         レーダ雨量(履歴4分割)(Cバンド)(2枚)ページスクリーンショット
 
@@ -929,28 +926,26 @@ class Kawabou(SiteBase):
 #### 雨量関連 ####
 
     # 雨量グラフ(10分)ページ
-    def __over_city_rain_keika(self,areacode=84):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0902")
+    def __over_city_rain_kobetu_t10(self,obsrvId:str="2132000100024"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?obsrvId={obsrvId}&gamenId=02-0904&fvrt=yes&timeType=10")
+    # 雨量グラフ(60分)(対象観測所)ページ
+    def __over_city_rain_kobetu_t60(self,ovsrvId:str="0332900100039"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={ovsrvId}&gamenId=02-0904&timeType=60&requestType=1")
     # 時間雨量経過表ページ
-    # 雨量グラフ(10分)ページと同一URL
-    def __over_city_rain_keika_1(self,areacode=84):
+    def __over_city_rain_keika(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKeika.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0902")
-    # 雨量グラフ(対象観測所)ページ
-    def __over_city_rain_kobetu(self,ovsrvId:str="0332900100039"):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={ovsrvId}&gamenId=02-0904&timeType=60&requestType=1")
-    # 時間雨量経過表(対象観測所1か所)
-    # 雨量グラフ(対象観測所)ページと同一URL
-    def __over_city_rain_kobetu_1(self,ovsrvId:str="2152800100021"):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetu.do?init=init&obsrvId={ovsrvId}&gamenId=02-0904&timeType=60&requestType=1")
     # 時間雨量経過表(比較観測所3か所)
-    def __over_city_rain_kobetuMLT(self,areacode=84):
+    def __over_city_rain_kobetuMLT(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRainKobetuMlt.do?init=init&prefCd=&townCd=&areaCd={areacode}&rvrsysCd=&gamenId=02-0903")
     # レーダ雨量(現況)(Cバンド)
-    def __over_city_radar_genkyo(self,areacode=80):
+    def __over_city_radar_genkyo(self,areacode:str="80"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&areaCd={areacode}&gamenId=02-1801")
     # レーダ雨量(累加)(Cバンド)
-    def __over_city_radar_ruika(self,areacode=84):
+    def __over_city_radar_ruika(self,areacode:str="84"):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRuika.do?init=init&areaCd={areacode}&gamenId=02-1802")
+    # レーダ雨量(履歴4分割)(Cバンド)(2枚)
+    def __over_city_radar_rirekiB(self,areacode:str="84"):
+        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRirekiB.do?init=init&areaCd={areacode}&gamenId=02-1804")
     # レーダ雨量(現況)(XRAIN)
     def __over_city_radar_yosokuD(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarYosokuD.do?init=init&areaCd={areacode}&gamenId=02-1805")
@@ -958,17 +953,14 @@ class Kawabou(SiteBase):
     # 現況の気象庁無verと同一URL
     def __over_city_radar_genkyo_kisyou(self,areacode=84):
         self.get_page(f"https://city.river.go.jp/kawabou/cityRadarGenkyo.do?init=init&areaCd={areacode}&gamenId=02-1801")
-    # レーダ雨量(履歴4分割)(Cバンド)(2枚)
-    def __over_city_radar_rirekiB(self,areacode=84):
-        self.get_page(f"https://city.river.go.jp/kawabou/cityRadarRirekiB.do?init=init&areaCd={areacode}&gamenId=02-1804")
 
 ### 一般向けの引数は適当に抽出、使用するときに調整必要
     # 一般向け川の防災情報(雨量グラフ)
     def __over_common_uryou(self,zm=15,ofcCd=15617,obsCd=127,lat:float=44.737,lon:float=142.1183611):
-        self.get_page(f"https://www.river.go.jp/kawabou/pc/tm?zm=15&itmkndCd=1&ofcCd=15617&obsCd=127&fld=0&clat=44.737&clon=142.1183611&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1")
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/tm?zm={zm}&itmkndCd=1&ofcCd={ofcCd}&obsCd={obsCd}&fld=0&clat={lat}&clon={lon}&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1")
     # 一般向け川の防災情報(XRAIN4分割)
-    def __over_common_xrain(self,zm=15,ofcCd=15617,obsCd=127,lat:float=44.737,lon:float=142.1183611):
-        self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm=15&clat=44.737&clon=142.1183611&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=4&rdopa=50&rdint=5")
+    def __over_common_xrain(self,zm=15,lat:float=44.737,lon:float=142.1183611):
+        self.get_page(f"https://www.river.go.jp/kawabou/pc/rd?zm={zm}&clat={lat}&clon={lon}&fld=0&mapType=0&viewGrpStg=0&viewRd=1&viewRW=1&viewRiver=1&viewPoint=1&ext=0&rdtype=xrain&rdnum=4&rdopa=50&rdint=5")
     
 #### 水位関連 ####
     # 水位グラフ
@@ -1193,11 +1185,13 @@ class Kawabou(SiteBase):
 
 
 def main():
+    obsrv = ["0332900100039","2132000100024"]
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_common_uryou()
-    kawabou.screenshot_common_xrain()
+    # kawabou.screenshot_over_city_radar_rirekiB()
+    # kawabou.screenshot_over_city_rain_kobetu_t10(obsrv)
+    kawabou.screenshot_over_city_rain_kobetu_t60(obsrv)
 
 if __name__ == "__main__":
     main()
