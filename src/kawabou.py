@@ -551,27 +551,22 @@ class Kawabou(SiteBase):
         self.save_screenshot_png(pngname)
 
 #### 積雪深 ####
-    def screenshot_over_city_snow_kobetu(self,ovsrvId="2075700300016",pngname:str="over_city_snow_kobetu.png"):
+    def screenshot_over_city_snow_kobetu(self,ovsrvId:list[str]=["2075700300016"],pngname:str="over_city_snow_kobetu.png"):
         '''
         時刻積雪深グラフスクリーンショット
 
-        :param str ovsrvId: 観測所コード
-        :param str pngname: ファイル名
-        '''
-        self.login()
-        self.__over_city_snow_kobetu(ovsrvId)
-        self.save_screenshot_png(pngname)
+        時刻積雪深(対象観測所)グラフスクリーンショット
 
-    def screenshot_over_city_snow_kobetu_target(self,ovsrvId="2075700300016",pngname:str="over_city_snow_kobetu_target.png"):
-        '''
-        時刻積雪深グラフ(対象観測所)スクリーンショット
+        時刻積雪深(比較観測所1か所)グラフスクリーンショット
 
         :param str ovsrvId: 観測所コード
         :param str pngname: ファイル名
         '''
-        self.login()
-        self.__over_city_snow_kobetu_target(ovsrvId)
-        self.save_screenshot_png(pngname)
+        for id in ovsrvId:
+            self.login()
+            self.__over_city_snow_kobetu(id)
+            filename = f"{id}-{pngname}"
+            self.save_screenshot_png(filename)
 
     def screenshot_over_city_snow_keika(self,areacode="81",pngname:str="over_city_snow_keika.png"):
         '''
@@ -992,11 +987,8 @@ class Kawabou(SiteBase):
 
 #### 積雪関連 ####
     # 時刻積雪深グラフ
-    def __over_city_snow_kobetu(self,obsrvId:str="2075700300016"):
-        self.get_page(f"https://city.river.go.jp/kawabou/citySnowKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1602&timeType=60&requestType=1")
     # 時刻積雪深グラフ(対象観測所)
-    # 同様URL
-    def __over_city_snow_kobetu_target(self,obsrvId:str="2075700300016"):
+    def __over_city_snow_kobetu(self,obsrvId:str="2075700300016"):
         self.get_page(f"https://city.river.go.jp/kawabou/citySnowKobetu.do?init=init&obsrvId={obsrvId}&gamenId=02-1602&timeType=60&requestType=1")
     # 時刻積雪深経過表
     def __over_city_snow_keika(self,areacode:str="81"):
@@ -1126,7 +1118,7 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_dam_kobetu_t60()
+    kawabou.screenshot_over_city_snow_kobetu()
 
 if __name__ == "__main__":
     main()
