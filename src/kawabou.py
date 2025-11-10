@@ -13,8 +13,21 @@ from datetime import datetime, timedelta
 import time
 import CONST
 from sitebase import SiteBase
-# from utils import load_csv_as_records,build_index
+from utils import split_datetime_parts
 
+
+from enum import Enum
+class CityFeature(Enum):
+    '''
+    都市河川防災情報の機能群  
+
+    時刻選択時の識別子として使用 
+    '''
+
+    CITY_DAM     = "cityDamKeika"
+    CITY_HAISUI  = "cityHaisuiKobetu"
+    CITY_SUISITU = "citySuisituKeika"
+    CITY_SNOW    = "citySnowKeika"
 
 class Kawabou(SiteBase):
     def __init__(self,window_width:int=1920,window_height:int=1500,debug:bool=False):
@@ -82,22 +95,29 @@ class Kawabou(SiteBase):
 ####            ページ内時刻選択処理部分                                                ######
 ############################################################################################
 
-    def __choise_common(self):
+    def __choise_time(self,cityFeature:CityFeature,str_time:str):
         '''
         各種時刻選択の共通部分
         
-        ※まだ途中
+        :param str str_time: "yyyy/MM/dd HH:MM:SS"形式の文字列。Noneの場合は現在時刻-10分を使用
 
         '''
-        cst_dam = "cityDamKeika"
-        cst_haisui = "cityHaisuiKobetu"
+
+        # if str_time:
+        #     datetime.strptime(str_time, "%Y/%m/%d %H:%M:%S")
+
+        dt_parts = split_datetime_parts(str_time)
+
         # yyyy年M月
-        # Select(self.driver.find_element(By.XPATH, '//*[@id="cityHaisuiKobetu_commonForm_yearMonthString"]')).select_by_value("00")
-        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_hourString"]')).select_by_value("00")
-        # 正時の時は何時でもいいはず
-        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_minuteString"]')).select_by_value("10")
-        # 
-        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_dayString"]')).select_by_value("05")
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cityFeature.value}_commonForm_yearMonthString"]')).select_by_value(dt_parts["year_month"])
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cityFeature.value}_commonForm_dayString"]')).select_by_value(dt_parts["day"])
+        Select(self.driver.find_element(By.XPATH, f'//*[@id="{cityFeature.value}_commonForm_hourString"]')).select_by_value(dt_parts["hour"])
+        # 正時の時は10固定
+        # Select(self.driver.find_element(By.XPATH, f'//*[@id="{cst_haisui}_commonForm_minuteString"]')).select_by_value(dt_parts["minute"])
+
+        # 水質・積雪深はminuteの選択がないためこの処置
+        if cityFeature != CityFeature.CITY_SUISITU and cityFeature != CityFeature.CITY_SNOW:
+            Select(self.driver.find_element(By.XPATH, f'//*[@id="{cityFeature.value}_commonForm_minuteString"]')).select_by_value("10")
         self.driver.find_element(By.NAME, "Img10pun").click()
 
 ############################################################################################
@@ -442,6 +462,21 @@ class Kawabou(SiteBase):
         self.__over_city_dam_keika(areacode)
         self.save_screenshot_png(pngname)
 
+    # 時刻ダム情報経過表観測日時スクリーンショット
+    def screenshot_over_city_dam_keika_select_time(self,areacode="81",str_time:str="2025/11/01 00:10:00",pngname:str="over_city_dam_keika_select_time.png"):
+        '''
+        時刻ダム情報経過表観測日時スクリーンショット
+
+        :param str areacode: 地方コード
+        :param str str_time: "yyyy/MM/dd HH:MM:SS"形式の文字列
+        例）"2025/11/01 00:10:00"
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_dam_keika(areacode)
+        self.__choise_time(CityFeature.CITY_DAM,str_time)
+        self.save_screenshot_png(pngname)
+
     # 時刻ダム情報詳細表(10分)スクリーンショット
     def screenshot_over_city_dam_keika_t10(self,areacode="81",pngname:str="over_city_dam_keika_t10.png"):
         '''
@@ -465,6 +500,20 @@ class Kawabou(SiteBase):
         '''
         self.login()
         self.__over_city_timesuisitu_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_suisitu_keika_select_time(self,areacode:str="84",str_time:str="2025/11/01 00:10:00",pngname:str="over_city_timesuisitu_keika_select_time.png"):
+        '''
+        時刻水質経過表観測日時選択後スクリーンショット
+
+        :param str areacode: 地方コード
+        :param str str_time: "yyyy/MM/dd HH:MM:SS"形式の文字列
+        例）"2025/11/01 00:10:00"
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_timesuisitu_keika(areacode)
+        self.__choise_time(CityFeature.CITY_SUISITU,str_time)
         self.save_screenshot_png(pngname)
     # 時刻水質グラフスクリーンショット
     def screenshot_over_city_suisitu_kobetu(self,ovsrvId="2152800600001",pngname:str="over_city_suisitu_kobetu.png"):
@@ -571,8 +620,22 @@ class Kawabou(SiteBase):
         self.login()
         self.__over_city_haisui_kobetu_t60(ovsrvId)
         self.save_screenshot_png(pngname)
+        
+    def screenshot_over_city_haisui_kobetu_select_time(self,ovsrvId="2329700900001",str_time:str="2025/11/01 00:10:00",pngname:str="over_city_haisui_kobetu_select_time.png"):
+        '''
+        開始・終了観測日時によるポンプ場のグラフの表示スクリーンショット
 
-    def screenshot_over_city_haisui_kobetu_t10(self,ovsrvId="2329700900001",pngname:str="over_city_haisui_kobetu_t10.png"):
+        :param str ovsrvId: 観測所コード
+        :param str str_time: "yyyy/MM/dd HH:MM:SS"形式の文字列
+        例）"2025/11/01 00:10:00"
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_haisui_kobetu_t60(ovsrvId)
+        self.__choise_time(CityFeature.CITY_HAISUI,str_time)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_haisui_kobetu_t10(self,ovsrvId="2132000900001",pngname:str="over_city_haisui_kobetu_t10.png"):
         '''
         時刻排水ポンプ場情報グラフ(10分)スクリーンショット
 
@@ -659,6 +722,20 @@ class Kawabou(SiteBase):
         '''
         self.login()
         self.__over_city_snow_keika(areacode)
+        self.save_screenshot_png(pngname)
+
+    def screenshot_over_city_snow_keika_select_time(self,areacode="81",str_time:str="2025/11/01 00:10:00",pngname:str="over_city_snow_keika_select_time.png"):
+        '''
+        時刻積雪深経過表時刻選択後スクリーンショット
+
+        :param str areacode: 地方コード
+        :param str str_time: "yyyy/MM/dd HH:MM:SS"形式の文字列
+        例）"2025/11/01 00:10:00"
+        :param str pngname: ファイル名
+        '''
+        self.login()
+        self.__over_city_snow_keika(areacode)
+        self.__choise_time(CityFeature.CITY_SNOW,str_time)
         self.save_screenshot_png(pngname)
 
 #### 海岸 ####
@@ -1222,7 +1299,8 @@ def main():
     kawabou = Kawabou(debug=True)
     kawabou.register("CFRICSTEST4","fricstest4")
     kawabou.login()
-    kawabou.screenshot_over_city_haisui_kobetu_t60()
+    # kawabou.screenshot_over_city_haisui_kobetu_select_time()
+    kawabou.screenshot_over_city_snow_keika_select_time()
 
 if __name__ == "__main__":
     main()
